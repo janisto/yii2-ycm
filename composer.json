@@ -1,0 +1,39 @@
+{
+    "name": "janisto/yii2-ycm",
+    "description": "YCM - Yii 2 Content Management module",
+    "keywords": ["yii2", "yii2-ycm", "admin", "administration", "module", "extension"],
+    "homepage": "https://github.com/janisto/yii2-ycm",
+    "type": "yii2-extension",
+    "license": "public domain",
+    "authors": [
+        {
+            "name": "Jani Mikkonen",
+            "email": "janisto@php.net"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/janisto/yii2-ycm/issues?state=open",
+        "source": "https://github.com/janisto/yii2-ycm"
+    },
+    "require": {
+        "php": ">=5.4.0",
+        "yiisoft/yii2": "*",
+        "yiisoft/yii2-bootstrap": "~2.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "4.*",
+        "scrutinizer/ocular": "~1.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "janisto\\ycm\\": "src"
+        }
+    },
+    "extra": {
+        "bootstrap": "janisto\\ycm\\Bootstrap",
+        "asset-installer-paths": {
+            "npm-asset-library": "vendor/npm",
+            "bower-asset-library": "vendor/bower"
+        }
+    }
+}

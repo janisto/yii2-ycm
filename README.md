@@ -2,7 +2,9 @@
 
 YCM - Yii 2 Content Management module
 
-## Module is in initial development. Anything may change at any time.
+## Module is in initial development.
+
+Anything may change at any time.
 
 ## Contributing
 

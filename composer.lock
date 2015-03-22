@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "a095ca3717b530374010782fabaf2d5f",
+    "hash": "48056093742d2c4ed4d1703eaab2586c",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -182,6 +182,34 @@
             }
         },
         {
+            "name": "bower-asset/select2",
+            "version": "3.5.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/select2/select2.git",
+                "reference": "6633cda9061d9fc65075dd140c63f9a6adbcbd72"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/select2/select2/zipball/6633cda9061d9fc65075dd140c63f9a6adbcbd72",
+                "reference": "6633cda9061d9fc65075dd140c63f9a6adbcbd72",
+                "shasum": ""
+            },
+            "require": {
+                "bower-asset/jquery": ">=1.7.1"
+            },
+            "type": "bower-asset-library",
+            "extra": {
+                "bower-asset-main": [
+                    "select2.js",
+                    "select2.css",
+                    "select2.png",
+                    "select2x2.png",
+                    "select2-spinner.gif"
+                ]
+            }
+        },
+        {
             "name": "bower-asset/yii2-pjax",
             "version": "dev-master",
             "source": {
@@ -223,12 +251,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/cebe/markdown.git",
-                "reference": "54a2c49de31cc44e864ebf0500a35ef21d0010b2"
+                "reference": "e14d3da8f84eefa3792fd22b5b5ecba9c98d2e18"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cebe/markdown/zipball/54a2c49de31cc44e864ebf0500a35ef21d0010b2",
-                "reference": "54a2c49de31cc44e864ebf0500a35ef21d0010b2",
+                "url": "https://api.github.com/repos/cebe/markdown/zipball/e14d3da8f84eefa3792fd22b5b5ecba9c98d2e18",
+                "reference": "e14d3da8f84eefa3792fd22b5b5ecba9c98d2e18",
                 "shasum": ""
             },
             "require": {
@@ -275,7 +303,7 @@
                 "markdown",
                 "markdown-extra"
             ],
-            "time": "2015-03-06 05:28:07"
+            "time": "2015-03-20 11:07:08"
         },
         {
             "name": "ezyang/htmlpurifier",
@@ -322,17 +350,123 @@
             "time": "2013-11-30 08:25:19"
         },
         {
+            "name": "vova07/yii2-imperavi-widget",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/vova07/yii2-imperavi-widget.git",
+                "reference": "480326bd5763799e61f6292ec9c924672a8ef152"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/vova07/yii2-imperavi-widget/zipball/480326bd5763799e61f6292ec9c924672a8ef152",
+                "reference": "480326bd5763799e61f6292ec9c924672a8ef152",
+                "shasum": ""
+            },
+            "require": {
+                "yiisoft/yii2": "*"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "4.*",
+                "scrutinizer/ocular": "~1.1"
+            },
+            "type": "yii2-extension",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                },
+                "asset-installer-paths": {
+                    "bower-asset-library": "vendor/bower"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "vova07\\imperavi\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Crudu Vasile",
+                    "email": "bazillio07@yandex.ru",
+                    "homepage": "https://github.com/vova07",
+                    "role": "Developer"
+                }
+            ],
+            "description": "The imperavi redactor widget for Yii 2 framework.",
+            "homepage": "https://github.com/vova07/yii2-imperavi-widget",
+            "keywords": [
+                "Redactor",
+                "extension",
+                "imperavi",
+                "widget",
+                "wysiwyg",
+                "yii",
+                "yii 2",
+                "yii2"
+            ],
+            "time": "2015-03-21 10:53:12"
+        },
+        {
+            "name": "vova07/yii2-select2-widget",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/vova07/yii2-select2-widget.git",
+                "reference": "9c7af864c8f797307156fcbf69fd7533975f2d05"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/vova07/yii2-select2-widget/zipball/9c7af864c8f797307156fcbf69fd7533975f2d05",
+                "reference": "9c7af864c8f797307156fcbf69fd7533975f2d05",
+                "shasum": ""
+            },
+            "require": {
+                "bower-asset/select2": "3.*",
+                "yiisoft/yii2": "*"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "vova07\\select2\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Crudu Vasile",
+                    "email": "bazillio07@yandex.ru"
+                }
+            ],
+            "description": "The select2 widget for Yii framework.",
+            "keywords": [
+                "select",
+                "select 2",
+                "select2",
+                "widget",
+                "yii 2",
+                "yii2"
+            ],
+            "time": "2015-01-26 09:31:57"
+        },
+        {
             "name": "yiisoft/yii2",
             "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-framework.git",
-                "reference": "0dc97c82cc4c5c9427695030575d9fcfe4bd5f9d"
+                "reference": "bcb9117115bf5e3f2fd3bb25fcf38f5c3a937f7a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/0dc97c82cc4c5c9427695030575d9fcfe4bd5f9d",
-                "reference": "0dc97c82cc4c5c9427695030575d9fcfe4bd5f9d",
+                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/bcb9117115bf5e3f2fd3bb25fcf38f5c3a937f7a",
+                "reference": "bcb9117115bf5e3f2fd3bb25fcf38f5c3a937f7a",
                 "shasum": ""
             },
             "require": {
@@ -407,7 +541,7 @@
                 "framework",
                 "yii2"
             ],
-            "time": "2015-03-15 05:26:06"
+            "time": "2015-03-21 12:52:44"
         },
         {
             "name": "yiisoft/yii2-bootstrap",
@@ -461,12 +595,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-composer.git",
-                "reference": "ad3df6e918cada0369bd4f831a976b1f8c97ad70"
+                "reference": "01d15542aac2abdf00bb139f4c905cde1b3c272b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-composer/zipball/ad3df6e918cada0369bd4f831a976b1f8c97ad70",
-                "reference": "ad3df6e918cada0369bd4f831a976b1f8c97ad70",
+                "url": "https://api.github.com/repos/yiisoft/yii2-composer/zipball/01d15542aac2abdf00bb139f4c905cde1b3c272b",
+                "reference": "01d15542aac2abdf00bb139f4c905cde1b3c272b",
                 "shasum": ""
             },
             "require": {
@@ -500,7 +634,7 @@
                 "extension installer",
                 "yii2"
             ],
-            "time": "2015-03-01 06:24:14"
+            "time": "2015-03-20 13:11:28"
         }
     ],
     "packages-dev": [
@@ -1084,12 +1218,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpspec/prophecy.git",
-                "reference": "26530c5a425c6f67c9fe4fa10a3773adc96c418d"
+                "reference": "07606749da971eda75434814a313ed0ce6790f6a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpspec/prophecy/zipball/26530c5a425c6f67c9fe4fa10a3773adc96c418d",
-                "reference": "26530c5a425c6f67c9fe4fa10a3773adc96c418d",
+                "url": "https://api.github.com/repos/phpspec/prophecy/zipball/07606749da971eda75434814a313ed0ce6790f6a",
+                "reference": "07606749da971eda75434814a313ed0ce6790f6a",
                 "shasum": ""
             },
             "require": {
@@ -1136,7 +1270,7 @@
                 "spy",
                 "stub"
             ],
-            "time": "2015-03-13 14:15:05"
+            "time": "2015-03-20 17:41:29"
         },
         {
             "name": "phpunit/php-code-coverage",

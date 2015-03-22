@@ -144,6 +144,7 @@ class Module extends \yii\base\Module
 
         if ($pk !== null) {
             if (($model = $model->findOne((int)$pk)) !== null) {
+                /** @var $model \yii\db\ActiveRecord */
                 return $model;
             } else {
                 throw new NotFoundHttpException('The requested page does not exist.');

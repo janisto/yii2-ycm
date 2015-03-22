@@ -254,7 +254,10 @@ class ModelController extends Controller
             } elseif (count($filePaths) > 0) {
                 foreach ($filePaths as $path) {
                     if (file_exists($path)) {
-                        @unlink($path); // Save failed - delete files.
+                        // Save failed - delete files.
+                        if (@unlink($path) === false) {
+                            throw new ServerErrorHttpException('Could not delete file: $path.');
+                        }
                     }
                 }
             }
@@ -295,7 +298,9 @@ class ModelController extends Controller
                     if ($delete) {
                         $path = $attributePath . DIRECTORY_SEPARATOR . $model->$attribute;
                         if (file_exists($path)) {
-                            @unlink($path);
+                            if (@unlink($path) === false) {
+                                throw new ServerErrorHttpException('Could not delete file: $path.');
+                            }
                         }
                         $model->$attribute = '';
                     } else {
@@ -334,7 +339,10 @@ class ModelController extends Controller
             } elseif (count($filePaths) > 0) {
                 foreach ($filePaths as $path) {
                     if (file_exists($path)) {
-                        @unlink($path); // Save failed - delete files.
+                        // Save failed - delete files.
+                        if (@unlink($path) === false) {
+                            throw new ServerErrorHttpException('Could not delete file: $path.');
+                        }
                     }
                 }
             }

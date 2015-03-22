@@ -437,7 +437,7 @@ class Module extends \yii\base\Module
      *
      * @param object $model Model
      * @param string $attribute Model attribute
-     * @return null|object
+     * @return null|string|object
      */
     public function getAttributeWidget($model, $attribute)
     {

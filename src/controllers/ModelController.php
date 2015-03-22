@@ -3,20 +3,18 @@
 namespace janisto\ycm\controllers;
 
 use Yii;
-use yii\data\ActiveDataProvider;
-use yii\base\Action;
+use vova07\imperavi\helpers\FileHelper as RedactorFileHelper;
 use yii\base\DynamicModel;
-use yii\base\InvalidCallException;
 use yii\base\InvalidConfigException;
+use yii\data\ActiveDataProvider;
 use yii\helpers\FileHelper;
 use yii\helpers\Html;
 use yii\helpers\StringHelper;
 use yii\helpers\Url;
 use yii\web\BadRequestHttpException;
-use yii\web\ServerErrorHttpException;
 use yii\web\Response;
+use yii\web\ServerErrorHttpException;
 use yii\web\UploadedFile;
-use vova07\imperavi\helpers\FileHelper as RedactorFileHelper;
 
 class ModelController extends Controller
 {

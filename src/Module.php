@@ -3,18 +3,18 @@
 namespace janisto\ycm;
 
 use Yii;
-use yii\web\NotFoundHttpException;
-use yii\web\JsExpression;
+use vova07\imperavi\Widget as RedactorWidget;
+use vova07\select2\Widget as Select2Widget;
 use yii\base\InvalidConfigException;
-use yii\helpers\Html;
+use yii\bootstrap\Modal;
 use yii\helpers\ArrayHelper;
 use yii\helpers\FileHelper;
+use yii\helpers\Html;
 use yii\helpers\Inflector;
 use yii\helpers\StringHelper;
 use yii\helpers\Url;
-use yii\bootstrap\Modal;
-use vova07\imperavi\Widget as RedactorWidget;
-use vova07\select2\Widget as Select2Widget;
+use yii\web\JsExpression;
+use yii\web\NotFoundHttpException;
 
 class Module extends \yii\base\Module
 {

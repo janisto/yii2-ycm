@@ -16,6 +16,9 @@ use yii\helpers\Url;
 use yii\web\JsExpression;
 use yii\web\NotFoundHttpException;
 
+/**
+ * @property array $models Registered models. This property is read-only.
+ */
 class Module extends \yii\base\Module
 {
     /**

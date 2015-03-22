@@ -32,8 +32,7 @@ tools:
         excluded_dirs: [vendor, tests]
     # PHP Similarity Analyzer and Copy/paste Detector cannot be used at
     # the same time right now. Make sure to either remove, or disable one.
-    php_sim:
-        enabled: false
     php_cpd:
         enabled: false
         excluded_dirs: [vendor, tests]
+    php_sim: false

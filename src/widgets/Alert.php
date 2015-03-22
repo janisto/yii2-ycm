@@ -28,41 +28,46 @@ class Alert extends \yii\bootstrap\Widget
      */
     public $delay = 5000;
 
+    /**
+     * @inheritdoc
+     */
     public function init()
     {
         parent::init();
 
-        $view = $this->getView();
-        $session = \Yii::$app->getSession();
-        $flashes = $session->getAllFlashes();
-        $appendCss = isset($this->options['class']) ? ' ' . $this->options['class'] : '';
+        if (\Yii::$app instanceof \yii\web\Application) {
+            $view = $this->getView();
+            $session = \Yii::$app->getSession();
+            $flashes = $session->getAllFlashes();
+            $appendCss = isset($this->options['class']) ? ' ' . $this->options['class'] : '';
 
-        foreach ($flashes as $type => $data) {
-            if (isset($this->alertTypes[$type])) {
-                $data = (array) $data;
-                foreach ($data as $i => $message) {
-                    /* initialize css class for each alert box */
-                    $this->options['class'] = $this->alertTypes[$type] . $appendCss;
+            foreach ($flashes as $type => $data) {
+                if (isset($this->alertTypes[$type])) {
+                    $data = (array) $data;
+                    foreach ($data as $i => $message) {
+                        /* initialize css class for each alert box */
+                        $this->options['class'] = $this->alertTypes[$type] . $appendCss;
 
-                    /* assign unique id to each alert box */
-                    $this->options['id'] = $this->getId() . '-' . $type . '-' . $i;
+                        /* assign unique id to each alert box */
+                        $this->options['id'] = $this->getId() . '-' . $type . '-' . $i;
 
-                    echo \yii\bootstrap\Alert::widget([
-                        'body' => $message,
-                        'closeButton' => $this->closeButton,
-                        'options' => $this->options,
-                    ]);
+                        echo \yii\bootstrap\Alert::widget([
+                            'body' => $message,
+                            'closeButton' => $this->closeButton,
+                            'options' => $this->options,
+                        ]);
 
-                    if ($this->delay > 0) {
-                        $js = 'jQuery("#' . $this->options['id'] . '").fadeTo(' . $this->delay . ', 0.00, function() {
-                            $(this).slideUp("slow", function() {
-                                $(this).remove();
-                            });
-                        });';
-                        $view->registerJs($js);
+                        if ($this->delay > 0) {
+                            $js = 'jQuery("#' . $this->options['id'] . '").fadeTo(' . $this->delay . ', 0.00, function() {
+                                $(this).slideUp("slow", function() {
+                                    $(this).remove();
+                                });
+                            });';
+                            $view->registerJs($js);
+                        }
                     }
+                    $session->removeFlash($type);
                 }
-                $session->removeFlash($type);
             }
         }
     }

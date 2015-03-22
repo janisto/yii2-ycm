@@ -368,7 +368,7 @@ class ModelController extends Controller
         /** @var $model \yii\db\ActiveRecord */
         $model = $module->loadModel($name, $pk);
 
-        if ($model->delete()) {
+        if ($model->delete() !== false) {
             Yii::$app->session->setFlash('success', 'Model has been deleted.');
         } else {
             Yii::$app->session->setFlash('error', 'Could not delete model.');

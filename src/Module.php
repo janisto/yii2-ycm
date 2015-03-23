@@ -17,7 +17,32 @@ use yii\web\JsExpression;
 use yii\web\NotFoundHttpException;
 
 /**
+ * Main module class for yii2-ycm.
+ *
+ * You can modify its configuration by adding an array to your application config under `modules`
+ * as shown in the following example:
+ *
+ * 'modules' => [
+ *     ...
+ *     'ycm' => [
+ *         'class' => 'janisto\ycm\Module',
+ *         'urlPrefix' => 'xxx',
+ *         'registerModels' => [
+ *             'test' => 'app\models\Test',
+ *             'user' => [
+ *                 'class' => 'app\models\User',
+ *                 'attribute' => 'value',
+ *             ],
+ *         ],
+ *     ],
+ *     ...
+ * ],
+ *
  * @property array $models Registered models. This property is read-only.
+ *
+ * @copyright 2015
+ * @author Jani Mikkonen <janisto@php.net>
+ * @license public domain
  */
 class Module extends \yii\base\Module
 {

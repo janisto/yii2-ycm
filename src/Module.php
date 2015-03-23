@@ -101,7 +101,12 @@ class Module extends \yii\base\Module
     public function init()
     {
         parent::init();
-        $this->setViewPath(dirname(__FILE__) . '/views');
+
+        $this->setAliases([
+            '@ycm' => __DIR__
+        ]);
+
+        $this->setViewPath('@ycm/views');
 
         if ($this->uploadPath === null) {
             $path = Yii::getAlias('@webroot') . DIRECTORY_SEPARATOR . 'uploads';
@@ -112,6 +117,7 @@ class Module extends \yii\base\Module
                 }
             }
         }
+
         if ($this->uploadUrl === null) {
             $this->uploadUrl = Yii::getAlias('@web') . '/uploads';
         }

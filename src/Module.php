@@ -69,6 +69,9 @@ class Module extends \yii\base\Module
      */
     public $urlRules = [
         '' => 'default/index',
+        'model/<action:\w+>/<name:\w+>/<pk:\d+>' => 'model/<action>',
+        'model/<action:\w+>/<name:\w+>' => 'model/<action>',
+        'model/<action:\w+>' => 'model/<action>',
     ];
 
     protected $attributesWidgets;

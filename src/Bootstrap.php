@@ -18,9 +18,10 @@ class Bootstrap implements BootstrapInterface
             if ($app instanceof ConsoleApplication) {
                 //$module->controllerNamespace = 'janisto\ycm\commands';
             } else {
+                $rules = array_merge($module->registerUrlRules, $module->urlRules);
                 $configUrlRule = [
                     'prefix' => $module->urlPrefix,
-                    'rules' => $module->urlRules
+                    'rules' => $rules,
                 ];
 
                 if ($module->urlPrefix != 'ycm') {

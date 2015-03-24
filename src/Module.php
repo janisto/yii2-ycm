@@ -59,7 +59,7 @@ class Module extends \yii\base\Module
     /** @var string URL prefix. */
     public $urlPrefix = 'admin';
 
-    /** @var array The rules to be used in URL management. */
+    /** @var array The default URL rules to be used in module. */
     public $urlRules = [
         '' => 'default/index',
         'model/<action:\w+>/<name:\w+>/<pk:\d+>' => 'model/<action>',
@@ -67,9 +67,17 @@ class Module extends \yii\base\Module
         'model/<action:\w+>' => 'model/<action>',
     ];
 
+    /** @var array Register models to module. */
+    public $registerModels = [];
+
+    /** @var array Register additional controllers to module. */
+    public $registerControllers = [];
+
+    /** @var array Register additional URL rules to module. */
+    public $registerUrlRules = [];
+
 
     protected $attributesWidgets;
-    public $registerModels = [];
     protected $models = [];
     public $maxColumns = 8;
 
@@ -121,6 +129,10 @@ class Module extends \yii\base\Module
             if (is_subclass_of($model, 'yii\db\ActiveRecord')) {
                 $this->models[$name] = $model;
             }
+        }
+
+        foreach ($this->registerControllers as $name => $class) {
+            $this->controllerMap[$name] = $class;
         }
     }
 

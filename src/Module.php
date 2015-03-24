@@ -77,7 +77,7 @@ class Module extends \yii\base\Module
     public $registerUrlRules = [];
 
 
-    protected $attributesWidgets;
+    protected $attributeWidgets;
     protected $models = [];
     public $maxColumns = 8;
 
@@ -482,9 +482,9 @@ class Module extends \yii\base\Module
      */
     public function getAttributeWidget($model, $attribute)
     {
-        if ($this->attributesWidgets !== null) {
-            if (isset($this->attributesWidgets->$attribute)) {
-                return $this->attributesWidgets->$attribute;
+        if ($this->attributeWidgets !== null) {
+            if (isset($this->attributeWidgets->$attribute)) {
+                return $this->attributeWidgets->$attribute;
             } else {
                 $column = $model->tableSchema->columns[$attribute];
                 if ($column->phpType === 'boolean') {
@@ -514,7 +514,7 @@ class Module extends \yii\base\Module
             }
         }
 
-        $this->attributesWidgets = (object)$data;
+        $this->attributeWidgets = (object)$data;
 
         return $this->getAttributeWidget($model, $attribute);
     }
@@ -550,8 +550,8 @@ class Module extends \yii\base\Module
     protected function getAttributeOptions($attribute, $options = [], $recursive = false)
     {
         $optionsName = (string)$attribute . 'Options';
-        if (isset($this->attributesWidgets->$optionsName)) {
-            $attributeOptions = array_slice($this->attributesWidgets->$optionsName, 2);
+        if (isset($this->attributeWidgets->$optionsName)) {
+            $attributeOptions = array_slice($this->attributeWidgets->$optionsName, 2);
             if (empty($options)) {
                 return $attributeOptions;
             } else {

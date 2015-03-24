@@ -515,7 +515,7 @@ class Module extends \yii\base\Module
      * @param string $attribute Model attribute
      * @return array
      */
-    private function getAttributeChoices($model, $attribute)
+    protected function getAttributeChoices($model, $attribute)
     {
         $data = [];
         $choicesName = (string)$attribute . 'Choices';

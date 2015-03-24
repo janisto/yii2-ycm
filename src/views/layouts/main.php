@@ -52,7 +52,6 @@ NavBar::end();
             <?php
 
             $sidebarItems = array_merge([
-                ['label' => Yii::t('ycm', 'Administration'), 'url' => ['default/index']],
                 ['label' => Yii::t('ycm', 'Models'), 'url' => ['model/index']],
             ], Yii::$app->controller->module->sidebarItems);
 

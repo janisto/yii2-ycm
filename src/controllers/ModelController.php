@@ -7,6 +7,8 @@ use vova07\imperavi\helpers\FileHelper as RedactorFileHelper;
 use yii\base\DynamicModel;
 use yii\base\InvalidConfigException;
 use yii\data\ActiveDataProvider;
+use yii\filters\AccessControl;
+use yii\filters\VerbFilter;
 use yii\helpers\FileHelper;
 use yii\helpers\Html;
 use yii\helpers\StringHelper;
@@ -21,7 +23,34 @@ class ModelController extends Controller
     /**
      * @var string Default action name
      */
-    //public $defaultAction='list';
+    //public $defaultAction = 'list';
+
+    /** @inheritdoc */
+    public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'actions' => ['index', 'list', 'create', 'update', 'delete', 'redactor-upload', 'redactor-list'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                        'matchCallback' => function ($rule, $action) {
+                            return in_array(Yii::$app->user->identity->username, $this->module->admins);
+                        }
+                    ],
+
+                ],
+            ],
+            'verbs' => [
+                'class' => VerbFilter::className(),
+                'actions' => [
+                    'delete' => ['post'],
+                ],
+            ],
+        ];
+    }
 
     /**
      * Redactor upload action.

@@ -26,6 +26,7 @@ use yii\web\NotFoundHttpException;
  *     ...
  *     'ycm' => [
  *         'class' => 'janisto\ycm\Module',
+ *         'admins' => ['admin'],
  *         'urlPrefix' => 'xxx',
  *         'registerModels' => [
  *             'test' => 'app\models\Test',
@@ -46,33 +47,26 @@ use yii\web\NotFoundHttpException;
  */
 class Module extends \yii\base\Module
 {
-    /**
-     * @inheritdoc
-     */
+    /** @inheritdoc */
     public $controllerNamespace = 'janisto\ycm\controllers';
-    /**
-     * Asset bundle
-     *
-     * @var string
-     */
+
+    /** @var array An array of administrator usernames. */
+    public $admins = [];
+
+    /** @var string Asset bundle. */
     public $assetBundle = 'janisto\ycm\YcmAsset';
-    /**
-     * URL prefix
-     *
-     * @var string
-     */
+
+    /** @var string URL prefix. */
     public $urlPrefix = 'admin';
-    /*
-     * URL rules
-     *
-     * @var array The rules to be used in URL management.
-     */
+
+    /** @var array The rules to be used in URL management. */
     public $urlRules = [
         '' => 'default/index',
         'model/<action:\w+>/<name:\w+>/<pk:\d+>' => 'model/<action>',
         'model/<action:\w+>/<name:\w+>' => 'model/<action>',
         'model/<action:\w+>' => 'model/<action>',
     ];
+
 
     protected $attributesWidgets;
     public $registerModels = [];

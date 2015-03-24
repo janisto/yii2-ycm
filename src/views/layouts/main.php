@@ -22,35 +22,56 @@ $assetBundle::register($this);
     <?php $this->head() ?>
 </head>
 <body>
-
 <?php $this->beginBody() ?>
-<div class="wrap">
-    <?php
-    NavBar::begin([
-        'brandLabel' => 'Administration',
-        'brandUrl' => ['default/index'],
-        'options' => [
-            'class' => 'navbar-inverse navbar-fixed-top',
-        ],
-    ]);
-    echo Nav::widget([
-        'options' => ['class' => 'navbar-nav navbar-right'],
-        'items' => [
-            Yii::$app->user->isGuest ?
-                ['label' => 'Login', 'url' => ['/site/login']] :
-                ['label' => 'Logout (' . Yii::$app->user->identity->username . ')',
-                    'url' => ['/site/logout'],
-                    'linkOptions' => ['data-method' => 'post']],
-        ],
-    ]);
-    NavBar::end();
-    ?>
 
-    <div class="container">
-        <?= Breadcrumbs::widget([
-            'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-        ]) ?>
-        <?= $content ?>
+<?php
+NavBar::begin([
+    'brandLabel' => Yii::t('ycm', 'Administration'),
+    'brandUrl' => ['default/index'],
+    'innerContainerOptions' => ['class' => 'container-fluid'],
+    'options' => [
+        'class' => 'navbar navbar-inverse navbar-fixed-top',
+    ],
+]);
+echo Nav::widget([
+    'options' => ['class' => 'navbar-nav navbar-right'],
+    'items' => [
+        Yii::$app->user->isGuest ?
+            ['label' => 'Login', 'url' => ['/site/login']] :
+            ['label' => 'Logout (' . Yii::$app->user->identity->username . ')',
+                'url' => ['/site/logout'],
+                'linkOptions' => ['data-method' => 'post']],
+    ],
+]);
+NavBar::end();
+?>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+            <?php
+
+            $sidebarItems = array_merge([
+                ['label' => Yii::t('ycm', 'Administration'), 'url' => ['default/index']],
+                ['label' => Yii::t('ycm', 'Models'), 'url' => ['model/index']],
+            ], Yii::$app->controller->module->sidebarItems);
+
+            echo Nav::widget([
+                'options' => ['class' => 'nav nav-sidebar'],
+                'activateParents' => true,
+                'items' => $sidebarItems,
+            ]);
+            ?>
+        </div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+
+            <?= Breadcrumbs::widget([
+                'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+            ]) ?>
+
+            <?= $content ?>
+
+        </div>
     </div>
 </div>
 

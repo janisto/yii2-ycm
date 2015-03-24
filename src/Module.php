@@ -76,6 +76,9 @@ class Module extends \yii\base\Module
     /** @var array Register additional URL rules to module. */
     public $registerUrlRules = [];
 
+    /** @var array Sidebar Nav items. */
+    public $sidebarItems = [];
+
 
     protected $attributeWidgets;
     protected $models = [];

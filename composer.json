@@ -20,6 +20,7 @@
         "php": ">=5.4.0",
         "yiisoft/yii2": "*",
         "yiisoft/yii2-bootstrap": "*",
+        "janisto/yii2-timepicker": "*",
         "vova07/yii2-imperavi-widget": "*",
         "vova07/yii2-select2-widget": "*"
     },

@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "48056093742d2c4ed4d1703eaab2586c",
+    "hash": "68fe11266236012e349776e170583899",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -102,6 +102,31 @@
             ]
         },
         {
+            "name": "bower-asset/jquery-ui",
+            "version": "1.11.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/components/jqueryui.git",
+                "reference": "c34f8dbf3ba57b3784b93f26119f436c0e8288e1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/components/jqueryui/zipball/c34f8dbf3ba57b3784b93f26119f436c0e8288e1",
+                "reference": "c34f8dbf3ba57b3784b93f26119f436c0e8288e1",
+                "shasum": ""
+            },
+            "require": {
+                "bower-asset/jquery": ">=1.6"
+            },
+            "type": "bower-asset-library",
+            "extra": {
+                "bower-asset-main": [
+                    "jquery-ui.js"
+                ],
+                "bower-asset-ignore": []
+            }
+        },
+        {
             "name": "bower-asset/jquery.inputmask",
             "version": "3.1.61",
             "source": {
@@ -152,6 +177,28 @@
                 "mask",
                 "plugins"
             ]
+        },
+        {
+            "name": "bower-asset/jqueryui-timepicker-addon",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/trentrichardson/jQuery-Timepicker-Addon.git",
+                "reference": "8c597e858143d8de3c315d7273cb44b9b72c5c17"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/trentrichardson/jQuery-Timepicker-Addon/zipball/8c597e858143d8de3c315d7273cb44b9b72c5c17",
+                "reference": "8c597e858143d8de3c315d7273cb44b9b72c5c17",
+                "shasum": ""
+            },
+            "type": "bower-asset-library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.5.2-dev"
+                }
+            },
+            "time": "2015-03-16 01:11:43"
         },
         {
             "name": "bower-asset/punycode",
@@ -350,6 +397,64 @@
             "time": "2013-11-30 08:25:19"
         },
         {
+            "name": "janisto/yii2-timepicker",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/janisto/yii2-timepicker.git",
+                "reference": "0f96c05fc25ee55769d6164975ba70d2f7b6a35f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/janisto/yii2-timepicker/zipball/0f96c05fc25ee55769d6164975ba70d2f7b6a35f",
+                "reference": "0f96c05fc25ee55769d6164975ba70d2f7b6a35f",
+                "shasum": ""
+            },
+            "require": {
+                "bower-asset/jqueryui-timepicker-addon": ">=1.5.2",
+                "php": ">=5.4.0",
+                "yiisoft/yii2": "*",
+                "yiisoft/yii2-jui": "*"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "4.*",
+                "scrutinizer/ocular": "~1.1"
+            },
+            "type": "yii2-extension",
+            "extra": {
+                "asset-installer-paths": {
+                    "bower-asset-library": "vendor/bower"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "janisto\\timepicker\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "public domain"
+            ],
+            "authors": [
+                {
+                    "name": "Jani Mikkonen",
+                    "email": "janisto@php.net"
+                }
+            ],
+            "description": "Yii 2 widget for jQuery Timepicker Addon.",
+            "homepage": "https://github.com/janisto/yii2-timepicker",
+            "keywords": [
+                "date",
+                "datetime",
+                "extension",
+                "time",
+                "timepicker",
+                "widget",
+                "yii2"
+            ],
+            "time": "2015-03-26 12:59:50"
+        },
+        {
             "name": "vova07/yii2-imperavi-widget",
             "version": "dev-master",
             "source": {
@@ -461,12 +566,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-framework.git",
-                "reference": "bcb9117115bf5e3f2fd3bb25fcf38f5c3a937f7a"
+                "reference": "5bded07e4a3c23ebc6d8eef7dfe6288f512dcbd8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/bcb9117115bf5e3f2fd3bb25fcf38f5c3a937f7a",
-                "reference": "bcb9117115bf5e3f2fd3bb25fcf38f5c3a937f7a",
+                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/5bded07e4a3c23ebc6d8eef7dfe6288f512dcbd8",
+                "reference": "5bded07e4a3c23ebc6d8eef7dfe6288f512dcbd8",
                 "shasum": ""
             },
             "require": {
@@ -541,7 +646,7 @@
                 "framework",
                 "yii2"
             ],
-            "time": "2015-03-21 12:52:44"
+            "time": "2015-03-26 12:24:59"
         },
         {
             "name": "yiisoft/yii2-bootstrap",
@@ -549,12 +654,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-bootstrap.git",
-                "reference": "eeb850ab89478ca49c39a3028f20351f5ff21167"
+                "reference": "90e3df6da4f642c3e6f505856c5f98c7bfee51c1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-bootstrap/zipball/eeb850ab89478ca49c39a3028f20351f5ff21167",
-                "reference": "eeb850ab89478ca49c39a3028f20351f5ff21167",
+                "url": "https://api.github.com/repos/yiisoft/yii2-bootstrap/zipball/90e3df6da4f642c3e6f505856c5f98c7bfee51c1",
+                "reference": "90e3df6da4f642c3e6f505856c5f98c7bfee51c1",
                 "shasum": ""
             },
             "require": {
@@ -565,6 +670,10 @@
             "extra": {
                 "branch-alias": {
                     "dev-master": "2.0.x-dev"
+                },
+                "asset-installer-paths": {
+                    "npm-asset-library": "vendor/npm",
+                    "bower-asset-library": "vendor/bower"
                 }
             },
             "autoload": {
@@ -587,7 +696,7 @@
                 "bootstrap",
                 "yii2"
             ],
-            "time": "2015-03-08 22:23:39"
+            "time": "2015-03-23 15:47:34"
         },
         {
             "name": "yiisoft/yii2-composer",
@@ -595,12 +704,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-composer.git",
-                "reference": "01d15542aac2abdf00bb139f4c905cde1b3c272b"
+                "reference": "24f53b745b6517258aedcff4f7dda7459aae503b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-composer/zipball/01d15542aac2abdf00bb139f4c905cde1b3c272b",
-                "reference": "01d15542aac2abdf00bb139f4c905cde1b3c272b",
+                "url": "https://api.github.com/repos/yiisoft/yii2-composer/zipball/24f53b745b6517258aedcff4f7dda7459aae503b",
+                "reference": "24f53b745b6517258aedcff4f7dda7459aae503b",
                 "shasum": ""
             },
             "require": {
@@ -634,7 +743,57 @@
                 "extension installer",
                 "yii2"
             ],
-            "time": "2015-03-20 13:11:28"
+            "time": "2015-03-23 18:34:13"
+        },
+        {
+            "name": "yiisoft/yii2-jui",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/yiisoft/yii2-jui.git",
+                "reference": "202f1c3e69f5db534c0995af903c06a5db5b7b33"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/yiisoft/yii2-jui/zipball/202f1c3e69f5db534c0995af903c06a5db5b7b33",
+                "reference": "202f1c3e69f5db534c0995af903c06a5db5b7b33",
+                "shasum": ""
+            },
+            "require": {
+                "bower-asset/jquery-ui": "1.11.*@stable",
+                "yiisoft/yii2": "*"
+            },
+            "type": "yii2-extension",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.0.x-dev"
+                },
+                "asset-installer-paths": {
+                    "npm-asset-library": "vendor/npm",
+                    "bower-asset-library": "vendor/bower"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "yii\\jui\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Qiang Xue",
+                    "email": "qiang.xue@gmail.com"
+                }
+            ],
+            "description": "The Jquery UI extension for the Yii framework",
+            "keywords": [
+                "jQuery UI",
+                "yii2"
+            ],
+            "time": "2015-03-23 18:36:03"
         }
     ],
     "packages-dev": [
@@ -2060,12 +2219,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/Console.git",
-                "reference": "3ed3fb0c80ee0292b19a1a78234ef7801cc7f0e8"
+                "reference": "de303b307151adadef2bbeff2858ac53d813e186"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Console/zipball/3ed3fb0c80ee0292b19a1a78234ef7801cc7f0e8",
-                "reference": "3ed3fb0c80ee0292b19a1a78234ef7801cc7f0e8",
+                "url": "https://api.github.com/repos/symfony/Console/zipball/de303b307151adadef2bbeff2858ac53d813e186",
+                "reference": "de303b307151adadef2bbeff2858ac53d813e186",
                 "shasum": ""
             },
             "require": {
@@ -2109,7 +2268,7 @@
             ],
             "description": "Symfony Console Component",
             "homepage": "http://symfony.com",
-            "time": "2015-03-13 17:40:40"
+            "time": "2015-03-22 16:57:18"
         },
         {
             "name": "symfony/event-dispatcher",
@@ -2177,12 +2336,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/Process.git",
-                "reference": "661d4e58afde74d919da4169cf809dd1a5f7734d"
+                "reference": "e68470654c6ad2c402f3df90a4461966dfd38bec"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Process/zipball/661d4e58afde74d919da4169cf809dd1a5f7734d",
-                "reference": "661d4e58afde74d919da4169cf809dd1a5f7734d",
+                "url": "https://api.github.com/repos/symfony/Process/zipball/e68470654c6ad2c402f3df90a4461966dfd38bec",
+                "reference": "e68470654c6ad2c402f3df90a4461966dfd38bec",
                 "shasum": ""
             },
             "require": {
@@ -2218,7 +2377,7 @@
             ],
             "description": "Symfony Process Component",
             "homepage": "http://symfony.com",
-            "time": "2015-03-13 17:50:01"
+            "time": "2015-03-23 08:18:05"
         },
         {
             "name": "symfony/yaml",
@@ -2227,12 +2386,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/Yaml.git",
-                "reference": "6411b65c8bb376e35eae6a2ec023b3e8da3ea44c"
+                "reference": "bc2504716cb3f7704dfff5d5dcb88df43282f414"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Yaml/zipball/6411b65c8bb376e35eae6a2ec023b3e8da3ea44c",
-                "reference": "6411b65c8bb376e35eae6a2ec023b3e8da3ea44c",
+                "url": "https://api.github.com/repos/symfony/Yaml/zipball/bc2504716cb3f7704dfff5d5dcb88df43282f414",
+                "reference": "bc2504716cb3f7704dfff5d5dcb88df43282f414",
                 "shasum": ""
             },
             "require": {
@@ -2268,7 +2427,7 @@
             ],
             "description": "Symfony Yaml Component",
             "homepage": "http://symfony.com",
-            "time": "2015-03-13 17:50:01"
+            "time": "2015-03-22 16:57:18"
         }
     ],
     "aliases": [],

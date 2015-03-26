@@ -1,4 +1,4 @@
-# yii2-ycm
+# Yii 2 YCM
 
 YCM - Yii 2 Content Management module
 

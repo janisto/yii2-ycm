@@ -41,9 +41,9 @@ use yii\web\NotFoundHttpException;
  *
  * @property array $models Registered models. This property is read-only.
  *
- * @copyright 2015
  * @author Jani Mikkonen <janisto@php.net>
- * @license public domain
+ * @license public domain (http://unlicense.org)
+ * @link https://github.com/janisto/yii2-ycm
  */
 class Module extends \yii\base\Module
 {

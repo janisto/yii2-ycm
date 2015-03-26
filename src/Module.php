@@ -210,8 +210,14 @@ class Module extends \yii\base\Module
         $widget = $this->getAttributeWidget($model, $attribute);
 
         switch ($widget) {
+            case 'widget':
+                $options = $this->getAttributeOptions($attribute);
+                echo $this->createField($form, $model, $attribute, $options, 'widget');
+                break;
+
             case 'wysiwyg':
                 $options = [
+                    'class' => RedactorWidget::className(),
                     'settings' => [
                         'minHeight' => 200,
                         'plugins' => [
@@ -246,7 +252,43 @@ class Module extends \yii\base\Module
                     ];
                     $options = array_merge_recursive($options, $fileOptions);
                 }
-                echo $this->createField($form, $model, $attribute, $options, 'wysiwyg');
+                echo $this->createField($form, $model, $attribute, $options, 'widget');
+                break;
+
+            case 'date':
+                $options = [
+                    'class' => TimePicker::className(),
+                    'mode' => 'date',
+                    'clientOptions'=>[
+                        'dateFormat' => 'yy-mm-dd',
+                    ],
+                ];
+                echo $this->createField($form, $model, $attribute, $options, 'widget');
+                break;
+
+            case 'time':
+                $options = [
+                    'class' => TimePicker::className(),
+                    'mode' => 'time',
+                    'clientOptions'=>[
+                        'timeFormat' => 'HH:mm:ss',
+                        'showSecond' => true,
+                    ],
+                ];
+                echo $this->createField($form, $model, $attribute, $options, 'widget');
+                break;
+
+            case 'datetime':
+                $options = [
+                    'class' => TimePicker::className(),
+                    'mode' => 'datetime',
+                    'clientOptions'=>[
+                        'dateFormat' => 'yy-mm-dd',
+                        'timeFormat' => 'HH:mm:ss',
+                        'showSecond' => true,
+                    ],
+                ];
+                echo $this->createField($form, $model, $attribute, $options, 'widget');
                 break;
 
             case 'select':
@@ -276,39 +318,6 @@ class Module extends \yii\base\Module
                     ],
                 ];
                 echo $this->createField($form, $model, $attribute, $options, 'select');
-                break;
-
-            case 'date':
-                $options = [
-                    'mode' => 'date',
-                    'clientOptions'=>[
-                        'dateFormat' => 'yy-mm-dd',
-                    ],
-                ];
-                echo $this->createField($form, $model, $attribute, $options, 'timepicker');
-                break;
-
-            case 'time':
-                $options = [
-                    'mode' => 'time',
-                    'clientOptions'=>[
-                        'timeFormat' => 'HH:mm:ss',
-                        'showSecond' => true,
-                    ],
-                ];
-                echo $this->createField($form, $model, $attribute, $options, 'timepicker');
-                break;
-
-            case 'datetime':
-                $options = [
-                    'mode' => 'datetime',
-                    'clientOptions'=>[
-                        'dateFormat' => 'yy-mm-dd',
-                        'timeFormat' => 'HH:mm:ss',
-                        'showSecond' => true,
-                    ],
-                ];
-                echo $this->createField($form, $model, $attribute, $options, 'timepicker');
                 break;
 
             case 'image':
@@ -438,6 +447,7 @@ class Module extends \yii\base\Module
      * @param array $options Attribute options
      * @param string $type ActiveField type
      * @return \yii\widgets\ActiveField ActiveField object
+     * @throws InvalidConfigException
      */
     protected function createField($form, $model, $attribute, $options, $type = 'textInput')
     {
@@ -469,8 +479,6 @@ class Module extends \yii\base\Module
             if ($type == 'dropDownList' || $type == 'listBox' || $type == 'checkboxList' || $type == 'radioList') {
                 $items = $this->getAttributeChoices($model, $attribute);
                 $field->$type($items, $options);
-            } elseif ($type == 'wysiwyg') {
-                $field->widget(RedactorWidget::className(), $options);
             } elseif ($type == 'select') {
                 if (isset($options['items'])) {
                     $options['items'] = $options['items'] + $this->getAttributeChoices($model, $attribute);;
@@ -478,8 +486,14 @@ class Module extends \yii\base\Module
                     $options['items'] = $this->getAttributeChoices($model, $attribute);
                 }
                 $field->widget(Select2Widget::className(), $options);
-            } elseif ($type == 'timepicker') {
-                $field->widget(TimePicker::className(), $options);
+            } elseif ($type == 'widget') {
+                if (isset($options['class'])) {
+                    $class = $options['class'];
+                    unset($options['class']);
+                } else {
+                    throw new InvalidConfigException('Widget class missing from configuration.');
+                }
+                $field->widget($class, $options);
             } else {
                 $field->$type($options);
             }

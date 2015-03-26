@@ -3,6 +3,7 @@
 namespace janisto\ycm;
 
 use Yii;
+use janisto\timepicker\TimePicker;
 use vova07\imperavi\Widget as RedactorWidget;
 use vova07\select2\Widget as Select2Widget;
 use yii\base\InvalidConfigException;
@@ -277,6 +278,39 @@ class Module extends \yii\base\Module
                 echo $this->createField($form, $model, $attribute, $options, 'select');
                 break;
 
+            case 'date':
+                $options = [
+                    'mode' => 'date',
+                    'clientOptions'=>[
+                        'dateFormat' => 'yy-mm-dd',
+                    ],
+                ];
+                echo $this->createField($form, $model, $attribute, $options, 'timepicker');
+                break;
+
+            case 'time':
+                $options = [
+                    'mode' => 'time',
+                    'clientOptions'=>[
+                        'timeFormat' => 'HH:mm:ss',
+                        'showSecond' => true,
+                    ],
+                ];
+                echo $this->createField($form, $model, $attribute, $options, 'timepicker');
+                break;
+
+            case 'datetime':
+                $options = [
+                    'mode' => 'datetime',
+                    'clientOptions'=>[
+                        'dateFormat' => 'yy-mm-dd',
+                        'timeFormat' => 'HH:mm:ss',
+                        'showSecond' => true,
+                    ],
+                ];
+                echo $this->createField($form, $model, $attribute, $options, 'timepicker');
+                break;
+
             case 'image':
                 $options = [];
                 if (!$model->isNewRecord && !empty($model->$attribute)) {
@@ -444,6 +478,8 @@ class Module extends \yii\base\Module
                     $options['items'] = $this->getAttributeChoices($model, $attribute);
                 }
                 $field->widget(Select2Widget::className(), $options);
+            } elseif ($type == 'timepicker') {
+                $field->widget(TimePicker::className(), $options);
             } else {
                 $field->$type($options);
             }

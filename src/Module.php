@@ -211,13 +211,12 @@ class Module extends \yii\base\Module
 
         switch ($widget) {
             case 'widget':
-                $options = $this->getAttributeOptions($attribute);
-                echo $this->createField($form, $model, $attribute, $options, 'widget');
+                echo $this->createField($form, $model, $attribute, [], 'widget');
                 break;
 
             case 'wysiwyg':
                 $options = [
-                    'class' => RedactorWidget::className(),
+                    'widgetClass' => RedactorWidget::className(),
                     'settings' => [
                         'minHeight' => 200,
                         'plugins' => [
@@ -257,7 +256,7 @@ class Module extends \yii\base\Module
 
             case 'date':
                 $options = [
-                    'class' => TimePicker::className(),
+                    'widgetClass' => TimePicker::className(),
                     'mode' => 'date',
                     'clientOptions'=>[
                         'dateFormat' => 'yy-mm-dd',
@@ -268,7 +267,7 @@ class Module extends \yii\base\Module
 
             case 'time':
                 $options = [
-                    'class' => TimePicker::className(),
+                    'widgetClass' => TimePicker::className(),
                     'mode' => 'time',
                     'clientOptions'=>[
                         'timeFormat' => 'HH:mm:ss',
@@ -280,7 +279,7 @@ class Module extends \yii\base\Module
 
             case 'datetime':
                 $options = [
-                    'class' => TimePicker::className(),
+                    'widgetClass' => TimePicker::className(),
                     'mode' => 'datetime',
                     'clientOptions'=>[
                         'dateFormat' => 'yy-mm-dd',
@@ -487,9 +486,9 @@ class Module extends \yii\base\Module
                 }
                 $field->widget(Select2Widget::className(), $options);
             } elseif ($type == 'widget') {
-                if (isset($options['class'])) {
-                    $class = $options['class'];
-                    unset($options['class']);
+                if (isset($options['widgetClass'])) {
+                    $class = $options['widgetClass'];
+                    unset($options['widgetClass']);
                 } else {
                     throw new InvalidConfigException('Widget class missing from configuration.');
                 }

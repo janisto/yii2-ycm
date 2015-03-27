@@ -16,7 +16,12 @@ $module = Yii::$app->controller->module;
 
         <?= Html::a('List ' . $module->getPluralName($name), ['model/list', 'name' => $name], ['class' => 'btn btn-primary']) ?>
 
-        <?= Html::a('Create ' . $module->getSingularName($name), ['model/create', 'name' => $name], ['class' => 'btn btn-success']) ?>
+        <?php
+        if ($module->getHideCreate($name) === false) {
+            echo Html::a('Create ' . $module->getSingularName($name), ['create', 'name' => $name], ['class' => 'btn btn-success']);
+        }
+        ?>
+
     <?php endforeach; ?>
 
 </div>

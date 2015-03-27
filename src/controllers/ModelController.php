@@ -181,18 +181,22 @@ class ModelController extends Controller
             'template' => '{update} {delete}',
             'buttons' => [
                 'update' => function ($url, $model, $key) {
-                    return Html::a('<span class="glyphicon glyphicon-pencil"></span>', $url, array_merge([
+                    return Html::a('<span class="glyphicon glyphicon-pencil"></span>', $url, [
                         'title' => Yii::t('yii', 'Update'),
                         'data-pjax' => '0',
-                    ]));
+                    ]);
                 },
                 'delete' => function ($url, $model, $key) {
-                    return Html::a('<span class="glyphicon glyphicon-trash"></span>', $url, array_merge([
-                        'title' => Yii::t('yii', 'Delete'),
-                        'data-confirm' => Yii::t('yii', 'Are you sure you want to delete this item?'),
-                        'data-method' => 'post',
-                        'data-pjax' => '0',
-                    ]));
+                    /** @var $module \janisto\ycm\Module */
+                    $module = $this->module;
+                    if ($module->getHideDelete($model) === false) {
+                        return Html::a('<span class="glyphicon glyphicon-trash"></span>', $url, [
+                            'title' => Yii::t('yii', 'Delete'),
+                            'data-confirm' => Yii::t('yii', 'Are you sure you want to delete this item?'),
+                            'data-method' => 'post',
+                            'data-pjax' => '0',
+                        ]);
+                    }
                 },
             ],
             'urlCreator' => function ($action, $model, $key, $index) {

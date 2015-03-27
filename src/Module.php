@@ -679,4 +679,58 @@ class Module extends \yii\base\Module
             return $model->adminNames[2];
         }
     }
+
+    /**
+     * Hide create model action?
+     *
+     * @param mixed $model
+     * @return bool
+     */
+    public function getHideCreate($model)
+    {
+        if (is_string($model)) {
+            $model = $this->loadModel($model);
+        }
+        if (isset($model->hideCreateAction)) {
+            return (bool) $model->hideCreateAction;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Hide update model action?
+     *
+     * @param mixed $model
+     * @return bool
+     */
+    public function getHideUpdate($model)
+    {
+        if (is_string($model)) {
+            $model = $this->loadModel($model);
+        }
+        if (isset($model->hideUpdateAction)) {
+            return (bool) $model->hideUpdateAction;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Hide delete model action?
+     *
+     * @param mixed $model
+     * @return bool
+     */
+    public function getHideDelete($model)
+    {
+        if (is_string($model)) {
+            $model = $this->loadModel($model);
+        }
+        if (isset($model->hideDeleteAction)) {
+            return (bool) $model->hideDeleteAction;
+        } else {
+            return false;
+        }
+    }
 }

@@ -25,7 +25,11 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= Alert::widget() ?>
 
     <p>
-        <?= Html::a('Create ' . $module->getSingularName($model), ['create', 'name' => $name], ['class' => 'btn btn-success']) ?>
+        <?php
+        if ($module->getHideCreate($model) === false) {
+            echo Html::a('Create ' . $module->getSingularName($model), ['create', 'name' => $name], ['class' => 'btn btn-success']);
+        }
+        ?>
     </p>
 
     <?= GridView::widget($config); ?>

@@ -80,14 +80,21 @@ class Module extends \yii\base\Module
     /** @var array Sidebar Nav items. */
     public $sidebarItems = [];
 
+    /** @var array Models */
+    protected $models = [];
+
+    /** @var array Model upload paths */
+    protected $modelPaths = [];
+
+    /** @var array Model upload URLs */
+    protected $modelUrls = [];
+
 
     protected $attributeWidgets;
-    protected $models = [];
     public $maxColumns = 8;
 
     public $uploadPath;
     public $uploadUrl;
-    public $uploadCreate = true;
     public $uploadPermissions = 0775;
     public $uploadDeleteTempFile = true;
     public $redactorImageUpload = true;
@@ -115,23 +122,28 @@ class Module extends \yii\base\Module
         $this->setViewPath('@ycm/views');
 
         if ($this->uploadPath === null) {
-            $path = Yii::getAlias('@webroot') . DIRECTORY_SEPARATOR . 'uploads';
-            $this->uploadPath = realpath($path);
-            if ($this->uploadPath === false && $this->uploadCreate === true) {
-                if (!FileHelper::createDirectory($path, $this->uploadPermissions)) {
-                    throw new InvalidConfigException('Could not create upload folder "$path".');
-                }
+            $this->uploadPath = Yii::getAlias('@uploadPath');
+            if (!is_writable($this->uploadPath)) {
+                throw new InvalidConfigException('Make sure "uploads" folder is writable.');
             }
         }
 
         if ($this->uploadUrl === null) {
-            $this->uploadUrl = Yii::getAlias('@web') . '/uploads';
+            $this->uploadUrl = Yii::getAlias('@uploadUrl');
         }
 
         foreach ($this->registerModels as $name => $class) {
+            if (is_array($class) && isset($class['folderName'])) {
+                $folder = strtolower($class['folderName']);
+                unset($class['folderName']);
+            } else {
+                $folder = strtolower($name);
+            }
             $model = Yii::createObject($class);
             if (is_subclass_of($model, 'yii\db\ActiveRecord')) {
                 $this->models[$name] = $model;
+                $this->modelPaths[$name] = $this->uploadPath . DIRECTORY_SEPARATOR . $folder;
+                $this->modelUrls[$name] = $this->uploadUrl . '/' . $folder;
             }
         }
 
@@ -506,10 +518,14 @@ class Module extends \yii\base\Module
      * @param string $name Model name
      * @param string $attribute Model attribute
      * @return string Model attribute file path
+     * @throws NotFoundHttpException
      */
     public function getAttributePath($name, $attribute)
     {
-        return $this->uploadPath . DIRECTORY_SEPARATOR . strtolower($name) . DIRECTORY_SEPARATOR . strtolower($attribute);
+        if (!isset($this->modelPaths[$name])) {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
+        return $this->modelPaths[$name] . DIRECTORY_SEPARATOR . strtolower($attribute);
     }
 
     /**
@@ -519,10 +535,14 @@ class Module extends \yii\base\Module
      * @param string $attribute Model attribute
      * @param string $file Filename
      * @return string Model attribute file URL
+     * @throws NotFoundHttpException
      */
     public function getAttributeUrl($name, $attribute, $file)
     {
-        return $this->uploadUrl . '/' . strtolower($name) . '/' . strtolower($attribute) . '/' . $file;
+        if (!isset($this->modelUrls[$name])) {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
+        return $this->modelUrls[$name] . '/' . strtolower($attribute) . '/' . $file;
     }
 
     /**

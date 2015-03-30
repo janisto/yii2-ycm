@@ -90,7 +90,7 @@ class ModelController extends Controller
                 ];
             } else {
                 if ($model->file->extension) {
-                    $model->file->name = md5($attribute.time().uniqid(rand(),true)) . '.' . $model->file->extension;
+                    $model->file->name = md5($attribute . time() . uniqid(rand(), true)) . '.' . $model->file->extension;
                 }
                 $path = $attributePath . DIRECTORY_SEPARATOR . $model->file->name;
                 if ($model->file->saveAs($path)) {
@@ -341,7 +341,7 @@ class ModelController extends Controller
                         if ($file) {
                             $model->$attribute = $file;
                             if ($model->validate()) {
-                                $fileName = md5($attribute.time().uniqid(rand(),true)) . '.' . $file->extension;
+                                $fileName = md5($attribute . time() . uniqid(rand(), true)) . '.' . $file->extension;
                                 if (!is_dir($attributePath)) {
                                     if (!FileHelper::createDirectory($attributePath, $module->uploadPermissions)) {
                                         throw new InvalidConfigException('Could not create folder "$attributePath". Make sure "uploads" folder is writable.');

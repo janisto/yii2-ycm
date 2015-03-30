@@ -28,11 +28,11 @@ class FileBehavior extends \yii\base\Behavior
         }
 
         if ($this->uploadPath === null) {
-            $this->uploadPath = Yii::getAlias('@uploadPath') . DIRECTORY_SEPARATOR . strtolower($this->folderName);
+            $this->uploadPath = Yii::getAlias('@uploadPath');
         }
 
         if ($this->uploadUrl === null) {
-            $this->uploadUrl = Yii::getAlias('@uploadUrl') . '/' . strtolower($this->folderName);
+            $this->uploadUrl = Yii::getAlias('@uploadUrl');
         }
     }
 
@@ -49,7 +49,7 @@ class FileBehavior extends \yii\base\Behavior
 
         if ($model->hasAttribute($attribute) && !empty($model->$attribute)) {
             $file = $model->$attribute;
-            $path = $this->uploadPath . DIRECTORY_SEPARATOR . strtolower($attribute);
+            $path = $this->uploadPath . DIRECTORY_SEPARATOR . strtolower($this->folderName) . DIRECTORY_SEPARATOR . strtolower($attribute);
             return $path . DIRECTORY_SEPARATOR . $file;
         }
         return false;
@@ -68,7 +68,7 @@ class FileBehavior extends \yii\base\Behavior
 
         if ($model->hasAttribute($attribute) && !empty($model->$attribute)) {
             $file = $model->$attribute;
-            $path = $this->uploadUrl . '/' . strtolower($attribute);
+            $path = $this->uploadUrl . '/' . strtolower($this->folderName) . '/' . strtolower($attribute);
             return $path . '/' . $file;
         }
         return false;
@@ -83,7 +83,7 @@ class FileBehavior extends \yii\base\Behavior
     public function getAbsoluteFileUrl($attribute)
     {
         $url = $this->getFileUrl($attribute);
-        if ($url) {
+        if ($url !== false) {
             if (strpos($url, '//') === false) {
                 return Yii::$app->getRequest()->getHostInfo() . $url;
             } else {

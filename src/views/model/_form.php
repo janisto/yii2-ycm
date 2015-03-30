@@ -39,23 +39,31 @@ $attributes = array_filter(array_unique(array_map('trim', $attributes)));
 
         <?php
         if (($module->getHideCreate($model) === true && $this->context->action->id == 'create') ||
-            ($module->getHideUpdate($model) === true && $this->context->action->id == 'update')) {
+            ($module->getHideUpdate($model) === true && $this->context->action->id == 'update')):
             // Save disabled. Add a note?
-        } else {
-            echo Html::submitButton('Save', ['name' => '_save', 'value' => '1', 'class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']);
-            echo Html::submitButton('Save and add another', ['name' => '_addanother', 'value' => '1', 'class' => 'btn btn-default']);
-            echo Html::submitButton('Save and continue editing', ['name' => '_continue', 'value' => '1', 'class' => 'btn btn-default']);
-        }
-        if (!$model->isNewRecord && $module->getHideDelete($model) === false) {
-            echo Html::a('Delete', ['delete', 'name' => $name, 'pk' => $model->primaryKey], [
+        else:
+            ?>
+
+            <?= Html::submitButton('Save', ['name' => '_save', 'value' => '1', 'class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+
+            <?= Html::submitButton('Save and add another', ['name' => '_addanother', 'value' => '1', 'class' => 'btn btn-default']) ?>
+
+            <?= Html::submitButton('Save and continue editing', ['name' => '_continue', 'value' => '1', 'class' => 'btn btn-default']) ?>
+
+        <?php
+        endif;
+
+        if (!$model->isNewRecord && $module->getHideDelete($model) === false): ?>
+
+            <?= Html::a('Delete', ['delete', 'name' => $name, 'pk' => $model->primaryKey], [
                 'title' => 'Delete',
-                //'data-confirm' => Yii::t('yii', 'Are you sure you want to delete this item?'), // See bugs #7231 and #6642
-                'data-method' => 'post',
-                'data-pjax' => '0',
+                'data-confirm' => Yii::t('yii', 'Are you sure you want to delete this item?'),
+                //'data-method' => 'post',  // See bugs #7231 and #6642
+                //'data-pjax' => '0',
                 'class' => 'btn btn-danger',
-            ]);
-        }
-        ?>
+            ]) ?>
+
+        <?php endif; ?>
 
     </div>
 

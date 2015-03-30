@@ -40,7 +40,7 @@ class FileBehavior extends \yii\base\Behavior
      * Get file path.
      *
      * @param string $attribute Model attribute
-     * @return string Model attribute file path
+     * @return string|boolean Model attribute file path
      */
     public function getFilePath($attribute)
     {
@@ -59,7 +59,7 @@ class FileBehavior extends \yii\base\Behavior
      * Get relative file URL.
      *
      * @param string $attribute Model attribute
-     * @return string Model attribute relative file URL
+     * @return string|boolean Model attribute relative file URL
      */
     public function getFileUrl($attribute)
     {
@@ -78,7 +78,7 @@ class FileBehavior extends \yii\base\Behavior
      * Get absolute file URL.
      *
      * @param string $attribute Model attribute
-     * @return string Model attribute absolute file URL
+     * @return string|boolean Model attribute absolute file URL
      */
     public function getAbsoluteFileUrl($attribute)
     {

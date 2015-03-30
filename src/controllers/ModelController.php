@@ -329,10 +329,10 @@ class ModelController extends Controller
                     $className = StringHelper::basename($model->className());
                     $delete = (isset($_POST[$className][$attribute . '_delete']));
                     if ($delete) {
-                        $path = $attributePath . DIRECTORY_SEPARATOR . $model->$attribute;
+                        $path = $attributePath . DIRECTORY_SEPARATOR . $model->getOldAttribute($attribute);
                         if (file_exists($path)) {
                             if (@unlink($path) === false) {
-                                throw new ServerErrorHttpException('Could not delete file: $path.');
+                                throw new ServerErrorHttpException('Could not delete file: ' . $path);
                             }
                         }
                         $model->$attribute = '';
@@ -349,7 +349,7 @@ class ModelController extends Controller
                                 }
                                 $path = $attributePath . DIRECTORY_SEPARATOR . $fileName;
                                 if (file_exists($path) || !$file->saveAs($path, $module->uploadDeleteTempFile)) {
-                                    throw new ServerErrorHttpException('Could not save file or file exists: "$path".');
+                                    throw new ServerErrorHttpException('Could not save file or file exists: ' . $path);
                                 }
                                 array_push($filePaths, $path);
                                 $model->$attribute = $fileName;

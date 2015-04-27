@@ -18,7 +18,7 @@ $module = Yii::$app->controller->module;
 
         <?php
         if ($module->getHideCreate($name) === false) {
-            echo Html::a('Create ' . $module->getSingularName($name), ['create', 'name' => $name], ['class' => 'btn btn-success']);
+            echo Html::a('Create ' . $module->getSingularName($name), ['model/create', 'name' => $name], ['class' => 'btn btn-success']);
         }
         ?>
 

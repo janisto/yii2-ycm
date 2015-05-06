@@ -67,11 +67,11 @@ class ModelController extends Controller
         if (Yii::$app->request->isPost) {
             /** @var $module \janisto\ycm\Module */
             $module = $this->module;
-            $name = (string)$name;
-            $attribute = (string)$attr;
+            $name = (string) $name;
+            $attribute = (string) $attr;
             $uploadType = 'image';
             $validatorOptions = $module->redactorImageUploadOptions;
-            if ((string)$type == 'file') {
+            if ((string) $type == 'file') {
                 $uploadType = 'file';
                 $validatorOptions = $module->redactorFileUploadOptions;
             }
@@ -123,8 +123,8 @@ class ModelController extends Controller
     {
         /** @var $module \janisto\ycm\Module */
         $module = $this->module;
-        $name = (string)$name;
-        $attribute = (string)$attr;
+        $name = (string) $name;
+        $attribute = (string) $attr;
         $attributePath = $module->getAttributePath($name, $attribute);
         $attributeUrl = $module->getAttributeUrl($name, $attribute, '');
         $format = 0;
@@ -133,7 +133,7 @@ class ModelController extends Controller
             'only' => ['*.png', '*.gif', '*.jpg', '*.jpeg'],
             'caseSensitive' => false
         ];
-        if ((string)$type == 'file') {
+        if ((string) $type == 'file') {
             $format = 1;
             $options = [
                 'url' => $attributeUrl,

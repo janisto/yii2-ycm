@@ -190,7 +190,7 @@ class Module extends \yii\base\Module
      */
     public function loadModel($name, $pk = null)
     {
-        $name = (string)$name;
+        $name = (string) $name;
         if (!ArrayHelper::keyExists($name, $this->models)) {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
@@ -199,7 +199,7 @@ class Module extends \yii\base\Module
         $model = $this->models[$name];
 
         if ($pk !== null) {
-            if (($model = $model->findOne((int)$pk)) !== null) {
+            if (($model = $model->findOne((int) $pk)) !== null) {
                 /** @var $model \yii\db\ActiveRecord */
                 return $model;
             } else {
@@ -586,7 +586,7 @@ class Module extends \yii\base\Module
             }
         }
 
-        $this->attributeWidgets = (object)$data;
+        $this->attributeWidgets = (object) $data;
 
         return $this->getAttributeWidget($model, $attribute);
     }
@@ -602,7 +602,7 @@ class Module extends \yii\base\Module
     protected function getAttributeChoices($model, $attribute)
     {
         $data = [];
-        $choicesName = (string)$attribute . 'Choices';
+        $choicesName = (string) $attribute . 'Choices';
         if (method_exists($model, $choicesName) && is_array($model->$choicesName())) {
             $data = $model->$choicesName();
         } elseif (isset($model->$choicesName) && is_array($model->$choicesName)) {
@@ -621,7 +621,7 @@ class Module extends \yii\base\Module
      */
     protected function getAttributeOptions($attribute, $options = [], $recursive = false)
     {
-        $optionsName = (string)$attribute . 'Options';
+        $optionsName = (string) $attribute . 'Options';
         if (isset($this->attributeWidgets->$optionsName)) {
             $attributeOptions = array_slice($this->attributeWidgets->$optionsName, 2);
             if (empty($options)) {

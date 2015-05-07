@@ -37,8 +37,8 @@ echo Nav::widget([
     'options' => ['class' => 'navbar-nav navbar-right'],
     'items' => [
         Yii::$app->user->isGuest ?
-            ['label' => 'Login', 'url' => ['/site/login']] :
-            ['label' => 'Logout (' . Yii::$app->user->identity->username . ')',
+            ['label' => Yii::t('ycm', 'Login'), 'url' => ['/site/login']] :
+            ['label' => Yii::t('ycm', 'Logout ({username})', ['username' => Yii::$app->user->identity->username]),
                 'url' => ['/site/logout'],
                 'linkOptions' => ['data-method' => 'post']],
     ],
@@ -50,9 +50,8 @@ NavBar::end();
     <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
             <?php
-
             $sidebarItems = array_merge([
-                ['label' => Yii::t('ycm', 'Models'), 'url' => ['model/index']],
+                ['label' => Yii::t('ycm', 'Content'), 'url' => ['model/index']],
             ], Yii::$app->controller->module->sidebarItems);
 
             echo Nav::widget([

@@ -13,21 +13,21 @@ use janisto\ycm\widgets\Alert;
 $module = Yii::$app->controller->module;
 
 $this->title = $module->getAdminName($model);
-$this->params['breadcrumbs'][] = ['label' => 'Models', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('ycm', 'Content'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 
 ?>
 
 <div class="ycm-model-list">
 
-    <h1><?= Html::encode($module->getAdminName($model)) ?></h1>
+    <h1><?= Html::encode($this->title) ?></h1>
 
     <?= Alert::widget() ?>
 
     <p>
         <?php
         if ($module->getHideCreate($model) === false) {
-            echo Html::a('Create ' . $module->getSingularName($model), ['create', 'name' => $name], ['class' => 'btn btn-success']);
+            echo Html::a(Yii::t('ycm', 'Create {name}', ['name' => $module->getSingularName($name)]), ['create', 'name' => $name], ['class' => 'btn btn-success']);
         }
         ?>
     </p>

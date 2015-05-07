@@ -9,8 +9,8 @@ use yii\helpers\Html;
 /** @var $module \janisto\ycm\Module */
 $module = Yii::$app->controller->module;
 
-$this->title = 'Create ' . $module->getSingularName($model);
-$this->params['breadcrumbs'][] = ['label' => 'Models', 'url' => ['index']];
+$this->title = Yii::t('ycm', 'Create {name}', ['name' => $module->getSingularName($name)]);
+$this->params['breadcrumbs'][] = ['label' => Yii::t('ycm', 'Content'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $module->getAdminName($model), 'url' => ['list', 'name' => $name]];
 $this->params['breadcrumbs'][] = $this->title;
 

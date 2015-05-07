@@ -44,20 +44,20 @@ $attributes = array_filter(array_unique(array_map('trim', $attributes)));
         else:
             ?>
 
-            <?= Html::submitButton('Save', ['name' => '_save', 'value' => '1', 'class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+            <?= Html::submitButton(Yii::t('ycm', 'Save'), ['name' => '_save', 'value' => '1', 'class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
 
-            <?= Html::submitButton('Save and add another', ['name' => '_addanother', 'value' => '1', 'class' => 'btn btn-default']) ?>
+            <?= Html::submitButton(Yii::t('ycm', 'Save and add another'), ['name' => '_addanother', 'value' => '1', 'class' => 'btn btn-default']) ?>
 
-            <?= Html::submitButton('Save and continue editing', ['name' => '_continue', 'value' => '1', 'class' => 'btn btn-default']) ?>
+            <?= Html::submitButton(Yii::t('ycm', 'Save and continue editing'), ['name' => '_continue', 'value' => '1', 'class' => 'btn btn-default']) ?>
 
         <?php
         endif;
 
         if (!$model->isNewRecord && $module->getHideDelete($model) === false): ?>
 
-            <?= Html::a('Delete', ['delete', 'name' => $name, 'pk' => $model->primaryKey], [
-                'title' => 'Delete',
-                'data-confirm' => Yii::t('yii', 'Are you sure you want to delete this item?'),
+            <?= Html::a(Yii::t('ycm', 'Delete'), ['delete', 'name' => $name, 'pk' => $model->primaryKey], [
+                'title' => Yii::t('ycm', 'Delete'),
+                'data-confirm' => Yii::t('ycm', 'Are you sure you want to delete this item?'),
                 //'data-method' => 'post',  // See bugs #7231 and #6642
                 //'data-pjax' => '0',
                 'class' => 'btn btn-danger',

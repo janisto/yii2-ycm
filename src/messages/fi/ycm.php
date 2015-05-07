@@ -17,5 +17,27 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
-    'Test' => 'Testi',
+    'Administration' => 'Ylläpito',
+    'Are you sure you want to delete this item?' => 'Haluatko varmasti poistaa tämän?',
+    'Choose {name}' => 'Valitse {name}',
+    'Content' => 'Sisältö',
+    'Could not delete {name}.' => 'Kohdetta "{name}" ei voitu poistaa.',
+    'Could not upload file.' => 'Tiedostoa ei voitu tallentaa.',
+    'Create {name}' => 'Luo uusi {name}',
+    'Delete' => 'Poista',
+    'Delete file' => 'Poista tiedosto',
+    'Delete image' => 'Poista kuva',
+    'Download file' => 'Lataa tiedosto',
+    'List {name}' => 'Listaa {name}',
+    'Login' => 'Kirjaudu sisään',
+    'Logout ({username})' => 'Kirjaudu ulos ({username})',
+    'Preview image' => 'Kuvan esikatselu',
+    'Save' => 'Tallenna',
+    'Save and add another' => 'Tallenna ja lisää uusi',
+    'Save and continue editing' => 'Tallenna ja jatka muokkausta',
+    'Update' => 'Päivitä',
+    'Update {name}' => 'Päivitä {name}',
+    '{name} has been created.' => '{name} on luotu.',
+    '{name} has been deleted.' => '{name} on poistettu.',
+    '{name} has been updated.' => '{name} on päivitetty.',
 ];

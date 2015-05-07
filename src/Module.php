@@ -9,7 +9,6 @@ use vova07\select2\Widget as Select2Widget;
 use yii\base\InvalidConfigException;
 use yii\bootstrap\Modal;
 use yii\helpers\ArrayHelper;
-use yii\helpers\FileHelper;
 use yii\helpers\Html;
 use yii\helpers\Inflector;
 use yii\helpers\StringHelper;
@@ -305,7 +304,7 @@ class Module extends \yii\base\Module
             case 'select':
                 $options = [
                     'options' => [
-                        'placeholder' => 'Choose item',
+                        'placeholder' => Yii::t('ycm', 'Choose {name}', ['name' => $model->getAttributeLabel($attribute)]),
                     ],
                     'settings' => [
                         'allowClear' => true,
@@ -322,7 +321,7 @@ class Module extends \yii\base\Module
                 $options = [
                     'options' => [
                         'multiple' => true,
-                        'placeholder' => 'Choose item',
+                        'placeholder' => Yii::t('ycm', 'Choose {name}', ['name' => $model->getAttributeLabel($attribute)]),
                     ],
                     'settings' => [
                         'width' => '100%',
@@ -340,12 +339,12 @@ class Module extends \yii\base\Module
                     $url = $this->getAttributeUrl($this->getModelName($model), $attribute, $model->$attribute);
                     ob_start();
                     echo '<div class="checkbox"><label for="'. $inputId .'">
-                        <input type="checkbox" name="' . $inputName . '" id="' . $inputId . '" value="delete"> Delete image
+                        <input type="checkbox" name="' . $inputName . '" id="' . $inputId . '" value="delete"> ' . Yii::t('ycm', 'Delete image') . '
                     </label></div>';
                     Modal::begin([
                         'size' => Modal::SIZE_LARGE,
-                        'header' => '<h4>Preview image</h4>',
-                        'toggleButton' => ['label' => 'Preview image', 'class' => 'btn btn-info btn-sm'],
+                        'header' => '<h4>' . Yii::t('ycm', 'Preview image') .'</h4>',
+                        'toggleButton' => ['label' => Yii::t('ycm', 'Preview image'), 'class' => 'btn btn-info btn-sm'],
                     ]);
                     echo Html::img($url, ['class'=>'modal-image']);
                     Modal::end();
@@ -363,9 +362,9 @@ class Module extends \yii\base\Module
                     $inputId = strtolower($className . '-' . $attribute . '_delete');
                     $url = $this->getAttributeUrl($this->getModelName($model), $attribute, $model->$attribute);
                     $html = '<div class="checkbox"><label for="'. $inputId .'">
-                        <input type="checkbox" name="' . $inputName . '" id="' . $inputId . '" value="delete"> Delete file
+                        <input type="checkbox" name="' . $inputName . '" id="' . $inputId . '" value="delete"> ' . Yii::t('ycm', ' Delete file') . '
                     </label></div>';
-                    $html .= Html::a('Download file', $url, ['class'=>'btn btn-info btn-sm']);
+                    $html .= Html::a(Yii::t('ycm', 'Download file'), $url, ['class'=>'btn btn-info btn-sm']);
                     $options['hint'] = $html;
                 }
                 echo $this->createField($form, $model, $attribute, $options, 'fileInput');
@@ -411,7 +410,7 @@ class Module extends \yii\base\Module
 
             case 'dropdown':
                 $options = [
-                    'prompt' => 'Choose ' . $model->getAttributeLabel($attribute),
+                    'prompt' => Yii::t('ycm', 'Choose {name}', ['name' => $model->getAttributeLabel($attribute)]),
                 ];
                 echo $this->createField($form, $model, $attribute, $options, 'dropDownList');
                 break;

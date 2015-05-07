@@ -23,7 +23,6 @@ class DefaultController extends Controller
                             return in_array(Yii::$app->user->identity->username, $this->module->admins);
                         }
                     ],
-
                 ],
             ],
             'verbs' => [
@@ -35,6 +34,11 @@ class DefaultController extends Controller
         ];
     }
 
+    /**
+     * Default action.
+     *
+     * @return string the rendering result.
+     */
     public function actionIndex()
     {
         return $this->render('index');

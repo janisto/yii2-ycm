@@ -20,11 +20,6 @@ use yii\web\UploadedFile;
 
 class ModelController extends Controller
 {
-    /**
-     * @var string Default action name
-     */
-    //public $defaultAction = 'list';
-
     /** @inheritdoc */
     public function behaviors()
     {
@@ -46,10 +41,22 @@ class ModelController extends Controller
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
+                    'redactor-upload' => ['post'],
+                    'redactor-list' => ['get'],
                     'delete' => ['get', 'post'],
                 ],
             ],
         ];
+    }
+
+    /**
+     * Default action.
+     *
+     * @return string the rendering result.
+     */
+    public function actionIndex()
+    {
+        return $this->render('index');
     }
 
     /**
@@ -64,51 +71,47 @@ class ModelController extends Controller
      */
     public function actionRedactorUpload($name, $attr, $type = 'image')
     {
-        if (Yii::$app->request->isPost) {
-            /** @var $module \janisto\ycm\Module */
-            $module = $this->module;
-            $name = (string) $name;
-            $attribute = (string) $attr;
-            $uploadType = 'image';
-            $validatorOptions = $module->redactorImageUploadOptions;
-            if ((string) $type == 'file') {
-                $uploadType = 'file';
-                $validatorOptions = $module->redactorFileUploadOptions;
-            }
-            $attributePath = $module->getAttributePath($name, $attribute);
-            if (!is_dir($attributePath)) {
-                if (!FileHelper::createDirectory($attributePath, $module->uploadPermissions)) {
-                    throw new InvalidConfigException('Could not create folder "$attributePath". Make sure "uploads" folder is writable.');
-                }
-            }
-            $file = UploadedFile::getInstanceByName('file');
-            $model = new DynamicModel(compact('file'));
-            $model->addRule('file', $uploadType, $validatorOptions)->validate();
-            if ($model->hasErrors()) {
-                $result = [
-                    'error' => $model->getFirstError('file')
-                ];
-            } else {
-                if ($model->file->extension) {
-                    $model->file->name = md5($attribute . time() . uniqid(rand(), true)) . '.' . $model->file->extension;
-                }
-                $path = $attributePath . DIRECTORY_SEPARATOR . $model->file->name;
-                if ($model->file->saveAs($path)) {
-                    $result = ['filelink' => $module->getAttributeUrl($name, $attribute, $model->file->name)];
-                    if ($uploadType == 'file') {
-                        $result['filename'] = $model->file->name;
-                    }
-                } else {
-                    $result = [
-                        'error' => 'Could not upload file.',
-                    ];
-                }
-            }
-            Yii::$app->response->format = Response::FORMAT_JSON;
-            return $result;
-        } else {
-            throw new BadRequestHttpException('Only POST is allowed');
+        /** @var $module \janisto\ycm\Module */
+        $module = $this->module;
+        $name = (string) $name;
+        $attribute = (string) $attr;
+        $uploadType = 'image';
+        $validatorOptions = $module->redactorImageUploadOptions;
+        if ((string) $type == 'file') {
+            $uploadType = 'file';
+            $validatorOptions = $module->redactorFileUploadOptions;
         }
+        $attributePath = $module->getAttributePath($name, $attribute);
+        if (!is_dir($attributePath)) {
+            if (!FileHelper::createDirectory($attributePath, $module->uploadPermissions)) {
+                throw new InvalidConfigException('Could not create folder "' . $attributePath . '". Make sure "uploads" folder is writable.');
+            }
+        }
+        $file = UploadedFile::getInstanceByName('file');
+        $model = new DynamicModel(compact('file'));
+        $model->addRule('file', $uploadType, $validatorOptions)->validate();
+        if ($model->hasErrors()) {
+            $result = [
+                'error' => $model->getFirstError('file')
+            ];
+        } else {
+            if ($model->file->extension) {
+                $model->file->name = md5($attribute . time() . uniqid(rand(), true)) . '.' . $model->file->extension;
+            }
+            $path = $attributePath . DIRECTORY_SEPARATOR . $model->file->name;
+            if ($model->file->saveAs($path)) {
+                $result = ['filelink' => $module->getAttributeUrl($name, $attribute, $model->file->name)];
+                if ($uploadType == 'file') {
+                    $result['filename'] = $model->file->name;
+                }
+            } else {
+                $result = [
+                    'error' => Yii::t('ycm', 'Could not upload file.'),
+                ];
+            }
+        }
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        return $result;
     }
 
     /**
@@ -143,16 +146,11 @@ class ModelController extends Controller
         return RedactorFileHelper::findFiles($attributePath, $options, $format);
     }
 
-    public function actionIndex()
-    {
-        return $this->render('index');
-    }
-
     /**
      * List models.
      *
      * @param string $name Model name
-     * @return string
+     * @return string the rendering result.
      */
     public function actionList($name)
     {
@@ -182,7 +180,7 @@ class ModelController extends Controller
             'buttons' => [
                 'update' => function ($url, $model, $key) {
                     return Html::a('<span class="glyphicon glyphicon-pencil"></span>', $url, [
-                        'title' => Yii::t('yii', 'Update'),
+                        'title' => Yii::t('ycm', 'Update'),
                         'data-pjax' => '0',
                     ]);
                 },
@@ -191,8 +189,8 @@ class ModelController extends Controller
                     $module = $this->module;
                     if ($module->getHideDelete($model) === false) {
                         return Html::a('<span class="glyphicon glyphicon-trash"></span>', $url, [
-                            'title' => Yii::t('yii', 'Delete'),
-                            'data-confirm' => Yii::t('yii', 'Are you sure you want to delete this item?'),
+                            'title' => Yii::t('ycm', 'Delete'),
+                            'data-confirm' => Yii::t('ycm', 'Are you sure you want to delete this item?'),
                             'data-method' => 'post',
                             'data-pjax' => '0',
                         ]);
@@ -262,12 +260,12 @@ class ModelController extends Controller
                             $fileName = md5($attribute . time() . uniqid(rand(), true)) . '.' . $file->extension;
                             if (!is_dir($attributePath)) {
                                 if (!FileHelper::createDirectory($attributePath, $module->uploadPermissions)) {
-                                    throw new InvalidConfigException('Could not create folder "$attributePath". Make sure "uploads" folder is writable.');
+                                    throw new InvalidConfigException('Could not create folder "' . $attributePath . '". Make sure "uploads" folder is writable.');
                                 }
                             }
                             $path = $attributePath . DIRECTORY_SEPARATOR . $fileName;
                             if (file_exists($path) || !$file->saveAs($path, $module->uploadDeleteTempFile)) {
-                                throw new ServerErrorHttpException('Could not save file or file exists: "{file}".');
+                                throw new ServerErrorHttpException('Could not save file or file exists: ' . $path);
                             }
                             array_push($filePaths, $path);
                             $model->$attribute = $fileName;
@@ -276,7 +274,7 @@ class ModelController extends Controller
                 }
             }
             if ($model->save()) {
-                Yii::$app->session->setFlash('success', 'Model has been created.');
+                Yii::$app->session->setFlash('success', Yii::t('ycm', '{name} has been created.', ['name' => $module->getSingularName($name)]));
                 if (Yii::$app->request->post('_addanother')) {
                     return $this->redirect(['create', 'name' => $name]);
                 } elseif (Yii::$app->request->post('_continue')) {
@@ -289,7 +287,7 @@ class ModelController extends Controller
                     if (file_exists($path)) {
                         // Save failed - delete files.
                         if (@unlink($path) === false) {
-                            throw new ServerErrorHttpException('Could not delete file: $path.');
+                            throw new ServerErrorHttpException('Could not delete file: ' . $path);
                         }
                     }
                 }
@@ -344,7 +342,7 @@ class ModelController extends Controller
                                 $fileName = md5($attribute . time() . uniqid(rand(), true)) . '.' . $file->extension;
                                 if (!is_dir($attributePath)) {
                                     if (!FileHelper::createDirectory($attributePath, $module->uploadPermissions)) {
-                                        throw new InvalidConfigException('Could not create folder "$attributePath". Make sure "uploads" folder is writable.');
+                                        throw new InvalidConfigException('Could not create folder "' . $attributePath . '". Make sure "uploads" folder is writable.');
                                     }
                                 }
                                 $path = $attributePath . DIRECTORY_SEPARATOR . $fileName;
@@ -361,7 +359,7 @@ class ModelController extends Controller
                 }
             }
             if ($model->save()) {
-                Yii::$app->session->setFlash('success', 'Model has been updated.');
+                Yii::$app->session->setFlash('success', Yii::t('ycm', '{name} has been updated.', ['name' => $module->getSingularName($name)]));
                 if (Yii::$app->request->post('_addanother')) {
                     return $this->redirect(['create', 'name' => $name]);
                 } elseif (Yii::$app->request->post('_continue')) {
@@ -374,7 +372,7 @@ class ModelController extends Controller
                     if (file_exists($path)) {
                         // Save failed - delete files.
                         if (@unlink($path) === false) {
-                            throw new ServerErrorHttpException('Could not delete file: $path.');
+                            throw new ServerErrorHttpException('Could not delete file: ' . $path);
                         }
                     }
                 }
@@ -402,9 +400,9 @@ class ModelController extends Controller
         $model = $module->loadModel($name, $pk);
 
         if ($model->delete() !== false) {
-            Yii::$app->session->setFlash('success', 'Model has been deleted.');
+            Yii::$app->session->setFlash('success', Yii::t('ycm', '{name} has been deleted.', ['name' => $module->getSingularName($name)]));
         } else {
-            Yii::$app->session->setFlash('error', 'Could not delete model.');
+            Yii::$app->session->setFlash('error', Yii::t('ycm', 'Could not delete {name}.', ['name' => $module->getSingularName($name)]));
         }
 
         return $this->redirect(['list', 'name' => $name]);

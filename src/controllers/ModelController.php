@@ -325,7 +325,8 @@ class ModelController extends Controller
                 if ($widget == 'file' || $widget == 'image') {
                     $attributePath = $module->getAttributePath($name, $attribute);
                     $className = StringHelper::basename($model->className());
-                    $delete = (isset($_POST[$className][$attribute . '_delete']));
+                    $postData = Yii::$app->request->post();
+                    $delete = (isset($postData[$className][$attribute . '_delete']));
                     if ($delete) {
                         $path = $attributePath . DIRECTORY_SEPARATOR . $model->getOldAttribute($attribute);
                         if (file_exists($path)) {

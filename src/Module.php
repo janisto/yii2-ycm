@@ -79,33 +79,49 @@ class Module extends \yii\base\Module
     /** @var array Sidebar Nav items. */
     public $sidebarItems = [];
 
-    /** @var array Models */
+    /** @var array Models. */
     protected $models = [];
 
-    /** @var array Model upload paths */
+    /** @var array Model upload paths. */
     protected $modelPaths = [];
 
-    /** @var array Model upload URLs */
+    /** @var array Model upload URLs. */
     protected $modelUrls = [];
 
-
-    protected $attributeWidgets;
-    public $maxColumns = 8;
-
+    /** @var string Upload path.  */
     public $uploadPath;
+
+    /** @var string Upload URL.  */
     public $uploadUrl;
+
+    /** @var integer Upload permissions for folders. */
     public $uploadPermissions = 0775;
+
+    /** @var boolean Whether to delete the temporary uploaded file after saving.  */
     public $uploadDeleteTempFile = true;
+
+    /** @var boolean Whether to enable redactor image uploads.  */
     public $redactorImageUpload = true;
+
+    /** @var array Redactor image upload validation rules. */
     public $redactorImageUploadOptions = [
         'maxWidth' => 1920,
         'maxHeight' => 1920,
         'maxSize' => 1048576, // 1024 * 1024 = 1MB
     ];
+
+    /** @var boolean Whether to enable redactor file uploads.  */
     public $redactorFileUpload = true;
+
+    /** @var array Redactor file upload validation rules. */
     public $redactorFileUploadOptions = [
         'maxSize' => 8388608, // 1024 * 1024 * 8 = 8MB
     ];
+
+    /** @var integer Number of columns to show in model/list view by default. */
+    public $maxColumns = 8;
+
+    protected $attributeWidgets;
 
     /**
      * @inheritdoc

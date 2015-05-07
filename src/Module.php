@@ -362,7 +362,7 @@ class Module extends \yii\base\Module
                     $inputId = strtolower($className . '-' . $attribute . '_delete');
                     $url = $this->getAttributeUrl($this->getModelName($model), $attribute, $model->$attribute);
                     $html = '<div class="checkbox"><label for="'. $inputId .'">
-                        <input type="checkbox" name="' . $inputName . '" id="' . $inputId . '" value="delete"> ' . Yii::t('ycm', ' Delete file') . '
+                        <input type="checkbox" name="' . $inputName . '" id="' . $inputId . '" value="delete"> ' . Yii::t('ycm', 'Delete file') . '
                     </label></div>';
                     $html .= Html::a(Yii::t('ycm', 'Download file'), $url, ['class'=>'btn btn-info btn-sm']);
                     $options['hint'] = $html;

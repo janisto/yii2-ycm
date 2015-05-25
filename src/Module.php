@@ -263,7 +263,7 @@ class Module extends \yii\base\Module
                             ],
                         ]
                     ];
-                    $options = array_merge_recursive($options, $imageOptions);
+                    $options = \yii\helpers\ArrayHelper::merge($options, $imageOptions);
                 }
                 if ($this->redactorFileUpload === true) {
                     $fileOptions =  [
@@ -276,7 +276,7 @@ class Module extends \yii\base\Module
                             ],
                         ]
                     ];
-                    $options = array_merge_recursive($options, $fileOptions);
+                    $options = \yii\helpers\ArrayHelper::merge($options, $fileOptions);
                 }
                 echo $this->createField($form, $model, $attribute, $options, 'widget');
                 break;
@@ -631,10 +631,9 @@ class Module extends \yii\base\Module
      *
      * @param string $attribute Model attribute
      * @param array $options Model attribute form options
-     * @param bool $recursive Merge option arrays recursively
      * @return array
      */
-    protected function getAttributeOptions($attribute, $options = [], $recursive = false)
+    protected function getAttributeOptions($attribute, $options = [])
     {
         $optionsName = (string) $attribute . 'Options';
         if (isset($this->attributeWidgets->$optionsName)) {
@@ -645,11 +644,7 @@ class Module extends \yii\base\Module
                 if (empty($attributeOptions)) {
                     return $options;
                 } else {
-                    if ($recursive === true) {
-                        return array_merge_recursive($options, $attributeOptions);
-                    } else {
-                        return array_merge($options, $attributeOptions);
-                    }
+                    return \yii\helpers\ArrayHelper::merge($options, $attributeOptions);
                 }
             }
         } else {

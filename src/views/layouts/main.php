@@ -50,7 +50,7 @@ NavBar::end();
     <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
             <?php
-            $sidebarItems = array_merge([
+            $sidebarItems = \yii\helpers\ArrayHelper::merge([
                 ['label' => Yii::t('ycm', 'Content'), 'url' => ['model/index']],
             ], Yii::$app->controller->module->sidebarItems);
 

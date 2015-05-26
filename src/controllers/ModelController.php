@@ -211,8 +211,13 @@ class ModelController extends Controller
                 'columns' => $columns,
             ];
         } else {
+            $sort = [];
+            if (method_exists($model, 'gridViewSort')) {
+                $sort = $model->gridViewSort();
+            }
             $dataProvider = new ActiveDataProvider([
                 'query' => $model->find(),
+                'sort' => $sort,
                 'pagination' => [
                     'pageSize' => 20,
                 ],

@@ -28,10 +28,10 @@ class Bootstrap implements BootstrapInterface
                     $configUrlRule['routePrefix'] = 'ycm';
                 }
 
-                $app->get('urlManager')->rules[] = new GroupUrlRule($configUrlRule);
+                $app->urlManager->addRules([new GroupUrlRule($configUrlRule)], false);
             }
 
-            $app->get('i18n')->translations['ycm'] = [
+            $app->i18n->translations['ycm'] = [
                 'class' => PhpMessageSource::className(),
                 'basePath' => __DIR__ . '/messages',
             ];

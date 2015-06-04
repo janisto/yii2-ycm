@@ -2,7 +2,7 @@
 
 All Notable changes to `yii2-ycm` will be documented in this file.
 
-## 0.1.1 - XXXX-XX-XX
+## 0.2.0 - 2015-06-04
 
 ### Added
 

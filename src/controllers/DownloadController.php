@@ -81,7 +81,7 @@ class DownloadController extends Controller
             foreach ($row as $item) {
                 if ($item == 0 || !empty($item)) {
                     // no new lines in CSV format.
-                    $fields[] = str_replace(["\r","\r\n","\n"], '', trim($item));
+                    $fields[] = str_replace(["\r","\r\n","\n"], '', trim(strip_tags($item)));
                 } else {
                     $fields[] = '';
                 }
@@ -144,7 +144,7 @@ class DownloadController extends Controller
             foreach ($row as $item) {
                 if ($item == 0 || !empty($item)) {
                     // no new lines in CSV format.
-                    $fields[] = str_replace(["\r","\r\n","\n"], '', trim($item));
+                    $fields[] = str_replace(["\r","\r\n","\n"], '', trim(strip_tags($item)));
                 } else {
                     $fields[] = '';
                 }
@@ -211,7 +211,7 @@ class DownloadController extends Controller
             $fields = '<tr>';
             foreach ($row as $item) {
                 if ($item == 0 || !empty($item)) {
-                    $fields .= '<td>' . trim($item) . '</td>';
+                    $fields .= '<td>' . trim(strip_tags($item)) . '</td>';
                 } else {
                     $fields .= '<td>&nbsp;</td>';
                 }

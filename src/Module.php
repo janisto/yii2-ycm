@@ -764,4 +764,58 @@ class Module extends \yii\base\Module
             return false;
         }
     }
+
+    /**
+     * Download CSV?
+     *
+     * @param mixed $model
+     * @return bool
+     */
+    public function getDownloadCsv($model)
+    {
+        if (is_string($model)) {
+            $model = $this->loadModel($model);
+        }
+        if (isset($model->downloadCsv)) {
+            return $model->downloadCsv;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Download MS CSV?
+     *
+     * @param mixed $model
+     * @return bool
+     */
+    public function getDownloadMsCsv($model)
+    {
+        if (is_string($model)) {
+            $model = $this->loadModel($model);
+        }
+        if (isset($model->downloadMsCsv)) {
+            return $model->downloadMsCsv;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Download Excel?
+     *
+     * @param mixed $model
+     * @return bool
+     */
+    public function getDownloadExcel($model)
+    {
+        if (is_string($model)) {
+            $model = $this->loadModel($model);
+        }
+        if (isset($model->downloadExcel)) {
+            return $model->downloadExcel;
+        } else {
+            return false;
+        }
+    }
 }

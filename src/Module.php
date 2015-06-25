@@ -65,6 +65,7 @@ class Module extends \yii\base\Module
         'model/<action:\w+>/<name:\w+>/<pk:\d+>' => 'model/<action>',
         'model/<action:\w+>/<name:\w+>' => 'model/<action>',
         'model/<action:\w+>' => 'model/<action>',
+        'download/<action:\w+>/<name:\w+>' => 'download/<action>',
     ];
 
     /** @var array Register models to module. */

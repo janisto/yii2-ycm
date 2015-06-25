@@ -818,4 +818,22 @@ class Module extends \yii\base\Module
             return false;
         }
     }
+
+    /**
+     * Get excluded download fields.
+     *
+     * @param mixed $model
+     * @return array
+     */
+    public function getExcludeDownloadFields($model)
+    {
+        if (is_string($model)) {
+            $model = $this->loadModel($model);
+        }
+        if (isset($model->excludeDownloadFields)) {
+            return $model->excludeDownloadFields;
+        } else {
+            return [];
+        }
+    }
 }

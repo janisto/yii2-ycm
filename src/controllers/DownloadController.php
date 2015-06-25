@@ -48,6 +48,7 @@ class DownloadController extends Controller
         $module = $this->module;
         /** @var $model \yii\db\ActiveRecord */
         $model = $module->loadModel($name);
+        $exclude = $module->getExcludeDownloadFields($name);
 
         $memoryLimit = 5*1024*1024;  // 5M
         $delimiter = ";";
@@ -56,8 +57,10 @@ class DownloadController extends Controller
         $select = '';
 
         foreach ($model->tableSchema->columns as $column) {
-            // skip primary key?
-            //if ($column->isPrimaryKey === true) continue;
+            // skip excluded fields
+            if (in_array($column->name, $exclude)) {
+                continue;
+            }
 
             // no new lines in CSV format.
             $header[] = str_replace(["\r", "\r\n", "\n"], '', trim($model->getAttributeLabel($column->name)));
@@ -111,6 +114,7 @@ class DownloadController extends Controller
         $module = $this->module;
         /** @var $model \yii\db\ActiveRecord */
         $model = $module->loadModel($name);
+        $exclude = $module->getExcludeDownloadFields($name);
 
         $memoryLimit = 5*1024*1024;  // 5M
         $delimiter = "\t"; // UTF-16LE needs "\t"
@@ -119,8 +123,10 @@ class DownloadController extends Controller
         $select = '';
 
         foreach ($model->tableSchema->columns as $column) {
-            // skip primary key?
-            //if ($column->isPrimaryKey === true) continue;
+            // skip excluded fields
+            if (in_array($column->name, $exclude)) {
+                continue;
+            }
 
             // no new lines in CSV format.
             $header[] = str_replace(["\r", "\r\n", "\n"], '', trim($model->getAttributeLabel($column->name)));
@@ -175,6 +181,7 @@ class DownloadController extends Controller
         $module = $this->module;
         /** @var $model \yii\db\ActiveRecord */
         $model = $module->loadModel($name);
+        $exclude = $module->getExcludeDownloadFields($name);
 
         $memoryLimit = 5*1024*1024; // 5M
         $select = '';
@@ -184,8 +191,10 @@ class DownloadController extends Controller
 
         $header = '<tr>';
         foreach ($model->tableSchema->columns as $column) {
-            // skip primary key?
-            //if ($column->isPrimaryKey === true) continue;
+            // skip excluded fields
+            if (in_array($column->name, $exclude)) {
+                continue;
+            }
 
             $header .= '<th align="left" style="color: #f74902;">' . trim($model->getAttributeLabel($column->name)) . '</th>';
             if ($select !== '') {

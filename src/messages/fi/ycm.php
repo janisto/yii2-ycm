@@ -17,6 +17,10 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
+    'CSV' => 'CSV',
+    'Download {name}' => 'Lataa {name}',
+    'Excel' => 'Excel',
+    'MS CSV' => 'MS CSV',
     'Administration' => 'Ylläpito',
     'Are you sure you want to delete this item?' => 'Haluatko varmasti poistaa tämän?',
     'Choose {name}' => 'Valitse {name}',

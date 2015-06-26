@@ -393,16 +393,16 @@
         },
         {
             "name": "janisto/yii2-timepicker",
-            "version": "0.1.0",
+            "version": "1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/janisto/yii2-timepicker.git",
-                "reference": "0f96c05fc25ee55769d6164975ba70d2f7b6a35f"
+                "reference": "817da44b65b30513be6f94867c9782c452d64938"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/janisto/yii2-timepicker/zipball/0f96c05fc25ee55769d6164975ba70d2f7b6a35f",
-                "reference": "0f96c05fc25ee55769d6164975ba70d2f7b6a35f",
+                "url": "https://api.github.com/repos/janisto/yii2-timepicker/zipball/817da44b65b30513be6f94867c9782c452d64938",
+                "reference": "817da44b65b30513be6f94867c9782c452d64938",
                 "shasum": ""
             },
             "require": {
@@ -412,7 +412,7 @@
                 "yiisoft/yii2-jui": "*"
             },
             "require-dev": {
-                "phpunit/phpunit": "4.*",
+                "phpunit/phpunit": "~4.5",
                 "scrutinizer/ocular": "~1.1"
             },
             "type": "yii2-extension",
@@ -447,7 +447,7 @@
                 "widget",
                 "yii2"
             ],
-            "time": "2015-03-26 12:59:50"
+            "time": "2015-06-26 08:39:12"
         },
         {
             "name": "vova07/yii2-imperavi-widget",

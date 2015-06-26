@@ -5,7 +5,7 @@ All Notable changes to `yii2-ycm` will be documented in this file.
 ## 0.3.0 - XXXX-XX-XX
 
 ### Added
-- Option download model data
+- Option to download model data
 
 ### Fixed
 - Updated dependencies

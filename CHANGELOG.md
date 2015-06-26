@@ -2,7 +2,7 @@
 
 All Notable changes to `yii2-ycm` will be documented in this file.
 
-## 0.3.0 - XXXX-XX-XX
+## 0.3.0 - 2015-06-26
 
 ### Added
 - Option to download model data

@@ -15,7 +15,6 @@
         "issues": "https://github.com/janisto/yii2-ycm/issues?state=open",
         "source": "https://github.com/janisto/yii2-ycm"
     },
-    "minimum-stability": "dev",
     "require": {
         "php": ">=5.4.0",
         "yiisoft/yii2": "*",

@@ -1,3 +1,7 @@
+env:
+  global:
+    secure: egoXnKQUXc0hyP30EpoCjUiV9nCyOwNOwBrE4uDFbDMEp2oMPnAsrO7quwsxiE6QeNwIyK/cSYjcnx+fUizfLWxpld/JiwulFNkQCsnWctTx+LLtsZ3LzDffvSEF6RpR24E+KrjOqjJmaV5soCEkjs+j1VXrkbTQ9kMfkqAKh10=
+
 language: php
 
 php:
@@ -7,6 +11,7 @@ php:
   - hhvm
 
 install:
+  - travis_retry composer config -g github-oauth.github.com $GITHUB_COMPOSER_AUTH
   - travis_retry composer self-update && composer --version
   - travis_retry composer global require "fxp/composer-asset-plugin:1.0.0"
   - export PATH="$HOME/.composer/vendor/bin:$PATH"

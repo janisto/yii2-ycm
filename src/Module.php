@@ -565,7 +565,7 @@ class Module extends \yii\base\Module
     /**
      * Get attributes widget.
      *
-     * @param object $model Model
+     * @param \yii\db\ActiveRecord $model Model
      * @param string $attribute Model attribute
      * @return null|string|object
      */
@@ -575,7 +575,8 @@ class Module extends \yii\base\Module
             if (isset($this->attributeWidgets->$attribute)) {
                 return $this->attributeWidgets->$attribute;
             } else {
-                $column = $model->tableSchema->columns[$attribute];
+                $tableSchema = $model->getTableSchema();
+                $column = $tableSchema->columns[$attribute];
                 if ($column->phpType === 'boolean') {
                     return 'checkbox';
                 } elseif ($column->type === 'text') {
@@ -612,7 +613,7 @@ class Module extends \yii\base\Module
      * Get an array of attribute choice values.
      * The variable or method name needs ​​to be: attributeChoices.
      *
-     * @param object $model Model
+     * @param \yii\db\ActiveRecord $model Model
      * @param string $attribute Model attribute
      * @return array
      */
@@ -661,7 +662,7 @@ class Module extends \yii\base\Module
     /**
      * Get model's administrative name.
      *
-     * @param mixed $model
+     * @param string|\yii\db\ActiveRecord $model
      * @return string
      */
     public function getAdminName($model)
@@ -679,7 +680,7 @@ class Module extends \yii\base\Module
     /**
      * Get model's singular name.
      *
-     * @param mixed $model
+     * @param string|\yii\db\ActiveRecord $model
      * @return string
      */
     public function getSingularName($model)
@@ -697,7 +698,7 @@ class Module extends \yii\base\Module
     /**
      * Get model's plural name.
      *
-     * @param mixed $model
+     * @param string|\yii\db\ActiveRecord $model
      * @return string
      */
     public function getPluralName($model)
@@ -715,7 +716,7 @@ class Module extends \yii\base\Module
     /**
      * Hide create model action?
      *
-     * @param mixed $model
+     * @param string|\yii\db\ActiveRecord $model
      * @return bool
      */
     public function getHideCreate($model)
@@ -733,7 +734,7 @@ class Module extends \yii\base\Module
     /**
      * Hide update model action?
      *
-     * @param mixed $model
+     * @param string|\yii\db\ActiveRecord $model
      * @return bool
      */
     public function getHideUpdate($model)
@@ -751,7 +752,7 @@ class Module extends \yii\base\Module
     /**
      * Hide delete model action?
      *
-     * @param mixed $model
+     * @param string|\yii\db\ActiveRecord $model
      * @return bool
      */
     public function getHideDelete($model)
@@ -769,7 +770,7 @@ class Module extends \yii\base\Module
     /**
      * Download CSV?
      *
-     * @param mixed $model
+     * @param string|\yii\db\ActiveRecord $model
      * @return bool
      */
     public function getDownloadCsv($model)
@@ -787,7 +788,7 @@ class Module extends \yii\base\Module
     /**
      * Download MS CSV?
      *
-     * @param mixed $model
+     * @param string|\yii\db\ActiveRecord $model
      * @return bool
      */
     public function getDownloadMsCsv($model)
@@ -805,7 +806,7 @@ class Module extends \yii\base\Module
     /**
      * Download Excel?
      *
-     * @param mixed $model
+     * @param string|\yii\db\ActiveRecord $model
      * @return bool
      */
     public function getDownloadExcel($model)
@@ -823,7 +824,7 @@ class Module extends \yii\base\Module
     /**
      * Get excluded download fields.
      *
-     * @param mixed $model
+     * @param string|\yii\db\ActiveRecord $model
      * @return array
      */
     public function getExcludeDownloadFields($model)

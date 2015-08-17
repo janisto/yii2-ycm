@@ -1,5 +1,6 @@
 <?php
 
+use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
@@ -8,8 +9,12 @@ use yii\widgets\Breadcrumbs;
 /* @var $this \yii\web\View */
 /* @var $content string */
 
-$assetBundle = Yii::$app->controller->module->assetBundle;
+/** @var $module \janisto\ycm\Module */
+$module = Yii::$app->controller->module;
+
+$assetBundle = $module->assetBundle;
 $assetBundle::register($this);
+
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -50,9 +55,9 @@ NavBar::end();
     <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
             <?php
-            $sidebarItems = \yii\helpers\ArrayHelper::merge([
+            $sidebarItems = ArrayHelper::merge([
                 ['label' => Yii::t('ycm', 'Content'), 'url' => ['model/index']],
-            ], Yii::$app->controller->module->sidebarItems);
+            ], $module->sidebarItems);
 
             echo Nav::widget([
                 'options' => ['class' => 'nav nav-sidebar'],

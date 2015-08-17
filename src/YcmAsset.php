@@ -2,7 +2,9 @@
 
 namespace janisto\ycm;
 
-class YcmAsset extends \yii\web\AssetBundle
+use yii\web\AssetBundle;
+
+class YcmAsset extends AssetBundle
 {
     public $sourcePath = '@ycm/assets';
     public $css = [

@@ -230,12 +230,13 @@ class Module extends \yii\base\Module
      * Create ActiveForm widget.
      *
      * @param \yii\widgets\ActiveForm $form
-     * @param object $model Model
+     * @param \yii\db\ActiveRecord $model Model
      * @param string $attribute Model attribute
      */
     public function createWidget($form, $model, $attribute)
     {
         $widget = $this->getAttributeWidget($model, $attribute);
+        $tableSchema = $model->getTableSchema();
 
         switch ($widget) {
             case 'widget':
@@ -264,7 +265,7 @@ class Module extends \yii\base\Module
                             ],
                         ]
                     ];
-                    $options = \yii\helpers\ArrayHelper::merge($options, $imageOptions);
+                    $options = ArrayHelper::merge($options, $imageOptions);
                 }
                 if ($this->redactorFileUpload === true) {
                     $fileOptions =  [
@@ -277,7 +278,7 @@ class Module extends \yii\base\Module
                             ],
                         ]
                     ];
-                    $options = \yii\helpers\ArrayHelper::merge($options, $fileOptions);
+                    $options = ArrayHelper::merge($options, $fileOptions);
                 }
                 echo $this->createField($form, $model, $attribute, $options, 'widget');
                 break;
@@ -389,14 +390,14 @@ class Module extends \yii\base\Module
 
             case 'text':
                 $options = [
-                    'maxlength' => $model->tableSchema->columns[$attribute]->size,
+                    'maxlength' => $tableSchema->columns[$attribute]->size,
                 ];
                 echo $this->createField($form, $model, $attribute, $options, 'textInput');
                 break;
 
             case 'hidden':
                 $options = [
-                    'maxlength' => $model->tableSchema->columns[$attribute]->size,
+                    'maxlength' => $tableSchema->columns[$attribute]->size,
                 ];
                 $options = $this->getAttributeOptions($attribute, $options);
                 echo Html::activeHiddenInput($model, $attribute, $options);
@@ -404,7 +405,7 @@ class Module extends \yii\base\Module
 
             case 'password':
                 $options = [
-                    'maxlength' => $model->tableSchema->columns[$attribute]->size,
+                    'maxlength' => $tableSchema->columns[$attribute]->size,
                 ];
                 echo $this->createField($form, $model, $attribute, $options, 'passwordInput');
                 break;
@@ -449,7 +450,7 @@ class Module extends \yii\base\Module
 
             case 'disabled':
                 $options = [
-                    'maxlength' => $model->tableSchema->columns[$attribute]->size,
+                    'maxlength' => $tableSchema->columns[$attribute]->size,
                     'readonly' => true,
                 ];
                 echo $this->createField($form, $model, $attribute, $options, 'textInput');
@@ -469,7 +470,7 @@ class Module extends \yii\base\Module
      * Create ActiveField object.
      *
      * @param \yii\widgets\ActiveForm $form
-     * @param object $model Model
+     * @param \yii\db\ActiveRecord $model Model
      * @param string $attribute Model attribute
      * @param array $options Attribute options
      * @param string $type ActiveField type
@@ -645,7 +646,7 @@ class Module extends \yii\base\Module
                 if (empty($attributeOptions)) {
                     return $options;
                 } else {
-                    return \yii\helpers\ArrayHelper::merge($options, $attributeOptions);
+                    return ArrayHelper::merge($options, $attributeOptions);
                 }
             }
         } else {

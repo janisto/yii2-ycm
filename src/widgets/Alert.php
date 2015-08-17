@@ -2,7 +2,11 @@
 
 namespace janisto\ycm\widgets;
 
-class Alert extends \yii\bootstrap\Widget
+use Yii;
+use yii\bootstrap\Widget;
+use yii\web\Application;
+
+class Alert extends Widget
 {
     /**
      * @var array the alert types configuration for the flash messages.
@@ -35,9 +39,9 @@ class Alert extends \yii\bootstrap\Widget
     {
         parent::init();
 
-        if (\Yii::$app instanceof \yii\web\Application) {
+        if (Yii::$app instanceof Application) {
             $view = $this->getView();
-            $session = \Yii::$app->getSession();
+            $session = Yii::$app->getSession();
             $flashes = $session->getAllFlashes();
             $appendCss = isset($this->options['class']) ? ' ' . $this->options['class'] : '';
 

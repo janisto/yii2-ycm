@@ -3,9 +3,10 @@
 namespace janisto\ycm\behaviors;
 
 use Yii;
+use yii\base\Behavior;
 use yii\base\InvalidConfigException;
 
-class FileBehavior extends \yii\base\Behavior
+class FileBehavior extends Behavior
 {
     /** @var string folder name */
     public $folderName;

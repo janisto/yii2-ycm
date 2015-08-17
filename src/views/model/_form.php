@@ -12,9 +12,10 @@ use janisto\ycm\widgets\Alert;
 /** @var $module \janisto\ycm\Module */
 $module = Yii::$app->controller->module;
 
+$tableSchema = $model->getTableSchema();
 $attributes = [];
 foreach ($model->attributeLabels() as $attribute => $label) {
-    if (isset($model->tableSchema->columns[$attribute]) && $model->tableSchema->columns[$attribute]->isPrimaryKey === true) {
+    if (isset($tableSchema->columns[$attribute]) && $tableSchema->columns[$attribute]->isPrimaryKey === true) {
         continue;
     }
     $attributes[] = $attribute;

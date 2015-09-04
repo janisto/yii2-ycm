@@ -21,7 +21,10 @@
         "yiisoft/yii2-bootstrap": "*",
         "janisto/yii2-timepicker": "*",
         "vova07/yii2-imperavi-widget": "*",
-        "vova07/yii2-select2-widget": "*"
+        "vova07/yii2-select2-widget": "*",
+        "kartik-v/yii2-grid": "@dev",
+        "kartik-v/yii2-krajee-base": "@dev",
+        "kartik-v/yii2-mpdf": "dev-master"
     },
     "require-dev": {
         "phpunit/phpunit": "~4.5",

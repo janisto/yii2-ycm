@@ -131,6 +131,8 @@ class Module extends \yii\base\Module
     {
         parent::init();
 
+        $this->setModule('gridview', ['class' => '\kartik\grid\Module']);
+
         $this->setAliases([
             '@ycm' => __DIR__
         ]);

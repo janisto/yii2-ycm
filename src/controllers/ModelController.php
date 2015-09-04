@@ -2,6 +2,7 @@
 
 namespace janisto\ycm\controllers;
 
+use kartik\grid\GridView;
 use Yii;
 use vova07\imperavi\helpers\FileHelper as RedactorFileHelper;
 use yii\base\DynamicModel;
@@ -11,6 +12,7 @@ use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
 use yii\helpers\FileHelper;
 use yii\helpers\Html;
+use yii\helpers\Json;
 use yii\helpers\StringHelper;
 use yii\helpers\Url;
 use yii\web\BadRequestHttpException;
@@ -159,6 +161,10 @@ class ModelController extends Controller
         /** @var $model \yii\db\ActiveRecord */
         $model = $module->loadModel($name);
 
+        if ($this->handleLiveEdit($model)) {
+            return;
+        }
+
         $columns = [];
         if (method_exists($model, 'gridViewColumns')) {
             $columns = $model->gridViewColumns();
@@ -173,9 +179,9 @@ class ModelController extends Controller
                 }
             }
         }
-        //array_unshift($columns, ['class' => 'yii\grid\SerialColumn']);
+        //array_unshift($columns, ['class' => 'kartik\grid\SerialColumn']);
         array_push($columns, [
-            'class' => 'yii\grid\ActionColumn',
+            'class' => 'kartik\grid\ActionColumn',
             'template' => '{update} {delete}',
             'buttons' => [
                 'update' => function ($url, $model, $key) {
@@ -203,13 +209,21 @@ class ModelController extends Controller
             }
         ]);
 
+        $config = [
+            'pjax' => true,
+            'panel' => [
+                'type' => GridView::TYPE_DEFAULT
+            ],
+            'toolbar'=> $this->getListToolbar($name, $model)
+        ];
+
         if (method_exists($model, 'search')) {
             $dataProvider = $model->search(Yii::$app->request->queryParams);
-            $config = [
+            $config = array_merge($config, [
                 'dataProvider' => $dataProvider,
                 'filterModel' => $model,
                 'columns' => $columns,
-            ];
+            ]);
         } else {
             $sort = [];
             if (method_exists($model, 'gridViewSort')) {
@@ -222,10 +236,14 @@ class ModelController extends Controller
                     'pageSize' => 20,
                 ],
             ]);
-            $config = [
+            $config = array_merge($config, [
                 'dataProvider' => $dataProvider,
                 'columns' => $columns,
-            ];
+            ]);
+        }
+
+        if (method_exists($model, 'gridViewConfig')) {
+            $config = array_merge($config, $model->gridViewConfig());
         }
 
         return $this->render('list', [
@@ -233,6 +251,55 @@ class ModelController extends Controller
             'model' => $model,
             'name' => $name,
         ]);
+    }
+
+    protected function handleLiveEdit($model)
+    {
+        $handled = false;
+
+        if (\Yii::$app->request->post('hasEditable')) {
+            $handled = true;
+            $output = '';
+            $message = '';
+
+            $class = $model->className();
+            $model = $class::findOne(\Yii::$app->request->post('editableKey'));
+
+            $modelShortName = basename(str_replace('\\', '/', $class));
+            $post = \Yii::$app->request->post($modelShortName);
+            $modelAttributes = current($post);
+
+            if ($model->load([$modelShortName => $modelAttributes])) {
+                $model->save();
+            }
+
+            echo Json::encode(['output' => $output, 'message' => $message]);
+        }
+
+        return $handled;
+    }
+
+    protected function getListToolbar($name, $model)
+    {
+        $buttons = [];
+
+        /** @var $module \janisto\ycm\Module */
+        $module = $this->module;
+
+        if ($module->getHideCreate($model) === false) {
+            $buttons[] = Html::a(
+                '<i class="glyphicon glyphicon-plus"></i> ' .
+                Yii::t('ycm', 'Create {name}', ['name' => $module->getSingularName($name)]),
+                ['create', 'name' => $name],
+                ['class' => 'btn btn-success']
+            );
+        }
+
+        return [
+            ['content' => implode(' ', $buttons)],
+            '{export}',
+            '{toggleData}',
+        ];
     }
 
     /**

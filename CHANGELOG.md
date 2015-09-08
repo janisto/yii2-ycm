@@ -2,6 +2,11 @@
 
 All Notable changes to `yii2-ycm` will be documented in this file.
 
+## 0.3.1 - XXXX-XX-XX
+
+### Added
+- Option to add a scenario to the model in list/search view
+
 ## 0.3.0 - 2015-06-26
 
 ### Added

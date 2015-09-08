@@ -204,6 +204,10 @@ class ModelController extends Controller
         ]);
 
         if (method_exists($model, 'search')) {
+            $scenarios = $model->scenarios();
+            if (isset($scenarios['ycm-search'])) {
+                $model->setScenario('ycm-search');
+            }
             $dataProvider = $model->search(Yii::$app->request->queryParams);
             $config = [
                 'dataProvider' => $dataProvider,

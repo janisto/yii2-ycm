@@ -6,6 +6,7 @@ All Notable changes to `yii2-ycm` will be documented in this file.
 
 ### Added
 - Option to add a scenario to the model in list/search view
+- Hide the grid view if dataProvider returns no data
 
 ## 0.3.0 - 2015-06-26
 

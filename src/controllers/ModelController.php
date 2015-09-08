@@ -213,6 +213,7 @@ class ModelController extends Controller
                 'dataProvider' => $dataProvider,
                 'filterModel' => $model,
                 'columns' => $columns,
+                'showOnEmpty' => false,
             ];
         } else {
             $sort = [];
@@ -229,6 +230,7 @@ class ModelController extends Controller
             $config = [
                 'dataProvider' => $dataProvider,
                 'columns' => $columns,
+                'showOnEmpty' => false,
             ];
         }
 

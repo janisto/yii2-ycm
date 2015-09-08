@@ -24,14 +24,6 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= Alert::widget() ?>
 
-    <p>
-        <?php
-        if ($module->getHideCreate($model) === false) {
-            echo Html::a(Yii::t('ycm', 'Create {name}', ['name' => $module->getSingularName($name)]), ['create', 'name' => $name], ['class' => 'btn btn-success']);
-        }
-        ?>
-    </p>
-
-    <?= GridView::widget($config); ?>
+    <?= \kartik\grid\GridView::widget($config); ?>
 
 </div>

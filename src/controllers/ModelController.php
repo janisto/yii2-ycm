@@ -270,7 +270,9 @@ class ModelController extends Controller
             $modelAttributes = current($post);
 
             if ($model->load([$modelShortName => $modelAttributes])) {
-                $model->save();
+                if (!$model->save()) {
+                    $message = Html::errorSummary($model);
+                }
             }
 
             echo Json::encode(['output' => $output, 'message' => $message]);

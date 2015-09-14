@@ -29,6 +29,24 @@ $this->params['breadcrumbs'][] = $this->title;
         if ($module->getHideCreate($model) === false) {
             echo Html::a(Yii::t('ycm', 'Create {name}', ['name' => $module->getSingularName($name)]), ['create', 'name' => $name], ['class' => 'btn btn-success']);
         }
+
+        if ($module->getEnableBulk($model)) {
+            foreach ($module->getBulkActions($model) as $bulkActionName => $bulkActionTitle) {
+                echo Html::a(
+                    Yii::t('app', $bulkActionTitle),
+                    ['list', 'name' => $name],
+                    [
+                        'class' => 'btn btn-success',
+                        'confirm' => 'Are you sure?',
+                        'data' => [
+                            'method' => 'post',
+                        ],
+                        'onClick' =>
+                            '$(this).data("params", {"bulkAction":"' . $bulkActionName . '", "pks":$("#w1").yiiGridView("getSelectedRows")});'
+                    ]
+                );
+            }
+        }
         ?>
     </p>
 

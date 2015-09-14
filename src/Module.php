@@ -122,6 +122,9 @@ class Module extends \yii\base\Module
     /** @var integer Number of columns to show in model/list view by default. */
     public $maxColumns = 8;
 
+    /** @var string Prefix bulk action method on model */
+    public $bulkActionMethodPrefix = 'bulkAction';
+
     protected $attributeWidgets;
 
     /**
@@ -721,14 +724,7 @@ class Module extends \yii\base\Module
      */
     public function getHideCreate($model)
     {
-        if (is_string($model)) {
-            $model = $this->loadModel($model);
-        }
-        if (isset($model->hideCreateAction)) {
-            return (bool) $model->hideCreateAction;
-        } else {
-            return false;
-        }
+        return $this->getModelPropertyAsBoolean($model, 'hideCreateAction');
     }
 
     /**
@@ -739,14 +735,7 @@ class Module extends \yii\base\Module
      */
     public function getHideUpdate($model)
     {
-        if (is_string($model)) {
-            $model = $this->loadModel($model);
-        }
-        if (isset($model->hideUpdateAction)) {
-            return (bool) $model->hideUpdateAction;
-        } else {
-            return false;
-        }
+        return $this->getModelPropertyAsBoolean($model, 'hideUpdateAction');
     }
 
     /**
@@ -757,14 +746,67 @@ class Module extends \yii\base\Module
      */
     public function getHideDelete($model)
     {
+        return $this->getModelPropertyAsBoolean($model, 'hideDeleteAction');
+    }
+
+    /**
+     * Get model property as bollean
+     *
+     * @param string|\yii\db\ActiveRecord $model $model
+     * @param string $property
+     * @return bool
+     * @throws NotFoundHttpException
+     */
+    protected function getModelPropertyAsBoolean($model, $property)
+    {
         if (is_string($model)) {
             $model = $this->loadModel($model);
         }
-        if (isset($model->hideDeleteAction)) {
-            return (bool) $model->hideDeleteAction;
+        if (isset($model->$property)) {
+            return (bool) $model->$property;
         } else {
             return false;
         }
+    }
+
+    /**
+     * Enable bulk model action
+     *
+     * @param string|\yii\db\ActiveRecord $model
+     * @return bool
+     */
+    public function getEnableBulk($model)
+    {
+        return $this->getModelPropertyAsBoolean($model, 'enableBulkAction');
+    }
+
+    /**
+     * Return bulk actions of model
+     *
+     * @param $model
+     * @return array
+     * @throws NotFoundHttpException
+     */
+    public function getBulkActions($model)
+    {
+        $actions = [];
+
+        if (is_string($model)) {
+            $model = $this->loadModel($model);
+        }
+
+        $reflection = new \ReflectionClass($model);
+
+        foreach ($reflection->getMethods(\ReflectionMethod::IS_PUBLIC) as $method) {
+            $method_name = $method->getName();
+
+            if (strpos($method_name, $this->bulkActionMethodPrefix) === 0) {
+                $action = substr($method_name, 10);
+                $actions[$action] = Inflector::camel2words($action);
+            }
+        }
+
+        return $actions;
     }
 
     /**

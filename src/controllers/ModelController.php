@@ -18,6 +18,11 @@ use yii\web\Response;
 use yii\web\ServerErrorHttpException;
 use yii\web\UploadedFile;
 
+/**
+ * Class ModelController
+ * @property \janisto\ycm\Module $module
+ * @package janisto\ycm\controllers
+ */
 class ModelController extends Controller
 {
     /** @inheritdoc */
@@ -159,6 +164,8 @@ class ModelController extends Controller
         /** @var $model \yii\db\ActiveRecord */
         $model = $module->loadModel($name);
 
+        $this->handleListBulkAction($model);
+
         $columns = [];
         if (method_exists($model, 'gridViewColumns')) {
             $columns = $model->gridViewColumns();
@@ -173,6 +180,11 @@ class ModelController extends Controller
                 }
             }
         }
+
+        if ($this->module->getEnableBulk($model)) {
+            array_unshift($columns, ['class' => 'yii\grid\CheckboxColumn']);
+        }
+
         //array_unshift($columns, ['class' => 'yii\grid\SerialColumn']);
         array_push($columns, [
             'class' => 'yii\grid\ActionColumn',
@@ -239,6 +251,37 @@ class ModelController extends Controller
             'model' => $model,
             'name' => $name,
         ]);
+    }
+
+    protected function handleListBulkAction($model)
+    {
+        $session = \Yii::$app->session;
+        $request = \Yii::$app->request;
+
+        if ($request->post('bulkAction')) {
+            $bulkActionMethod = $this->module->bulkActionMethodPrefix . $request->post('bulkAction');
+            if (method_exists($model, $bulkActionMethod)) {
+                if ($request->post('pks')) {
+                    $models = $model->findAll(explode(',', $request->post('pks')));
+
+                    if ($models) {
+                        try {
+                            if ($model->$bulkActionMethod($models)) {
+                                $session->addFlash('success', \Yii::t('ycm', 'Success'));
+                            } else {
+                                $session->addFlash('warning', \Yii::t('ycm', 'Something went wrong'));
+                            }
+                        } catch (\Exception $e) {
+                            $session->addFlash('error', $e->getMessage());
+                        }
+                    } else {
+                        $session->addFlash('error', \Yii::t('ycm', 'Records not found'));
+                    }
+                } else {
+                    $session->addFlash('error', \Yii::t('ycm', 'Action not found'));
+                }
+            }
+        }
     }
 
     /**

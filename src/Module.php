@@ -714,6 +714,25 @@ class Module extends \yii\base\Module
     }
 
     /**
+     * Get model property.
+     *
+     * @param string|\yii\db\ActiveRecord $model
+     * @param string $property
+     * @return mixed
+     */
+    protected function getModelProperty($model, $property)
+    {
+        if (is_string($model)) {
+            $model = $this->loadModel($model);
+        }
+        if (isset($model->$property)) {
+            return $model->$property;
+        } else {
+            return false;
+        }
+    }
+
+    /**
      * Hide create model action?
      *
      * @param string|\yii\db\ActiveRecord $model
@@ -721,14 +740,7 @@ class Module extends \yii\base\Module
      */
     public function getHideCreate($model)
     {
-        if (is_string($model)) {
-            $model = $this->loadModel($model);
-        }
-        if (isset($model->hideCreateAction)) {
-            return (bool) $model->hideCreateAction;
-        } else {
-            return false;
-        }
+        return (bool) $this->getModelProperty($model, 'hideCreateAction');
     }
 
     /**
@@ -739,14 +751,7 @@ class Module extends \yii\base\Module
      */
     public function getHideUpdate($model)
     {
-        if (is_string($model)) {
-            $model = $this->loadModel($model);
-        }
-        if (isset($model->hideUpdateAction)) {
-            return (bool) $model->hideUpdateAction;
-        } else {
-            return false;
-        }
+        return (bool) $this->getModelProperty($model, 'hideUpdateAction');
     }
 
     /**
@@ -757,14 +762,7 @@ class Module extends \yii\base\Module
      */
     public function getHideDelete($model)
     {
-        if (is_string($model)) {
-            $model = $this->loadModel($model);
-        }
-        if (isset($model->hideDeleteAction)) {
-            return (bool) $model->hideDeleteAction;
-        } else {
-            return false;
-        }
+        return (bool) $this->getModelProperty($model, 'hideDeleteAction');
     }
 
     /**
@@ -775,14 +773,7 @@ class Module extends \yii\base\Module
      */
     public function getDownloadCsv($model)
     {
-        if (is_string($model)) {
-            $model = $this->loadModel($model);
-        }
-        if (isset($model->downloadCsv)) {
-            return $model->downloadCsv;
-        } else {
-            return false;
-        }
+        return (bool) $this->getModelProperty($model, 'downloadCsv');
     }
 
     /**
@@ -793,14 +784,7 @@ class Module extends \yii\base\Module
      */
     public function getDownloadMsCsv($model)
     {
-        if (is_string($model)) {
-            $model = $this->loadModel($model);
-        }
-        if (isset($model->downloadMsCsv)) {
-            return $model->downloadMsCsv;
-        } else {
-            return false;
-        }
+        return (bool) $this->getModelProperty($model, 'downloadMsCsv');
     }
 
     /**
@@ -811,14 +795,7 @@ class Module extends \yii\base\Module
      */
     public function getDownloadExcel($model)
     {
-        if (is_string($model)) {
-            $model = $this->loadModel($model);
-        }
-        if (isset($model->downloadExcel)) {
-            return $model->downloadExcel;
-        } else {
-            return false;
-        }
+        return (bool) $this->getModelProperty($model, 'downloadExcel');
     }
 
     /**
@@ -829,13 +806,10 @@ class Module extends \yii\base\Module
      */
     public function getExcludeDownloadFields($model)
     {
-        if (is_string($model)) {
-            $model = $this->loadModel($model);
+        $value = $this->getModelProperty($model, 'excludeDownloadFields');
+        if (is_array($value)) {
+            return $value;
         }
-        if (isset($model->excludeDownloadFields)) {
-            return $model->excludeDownloadFields;
-        } else {
-            return [];
-        }
+        return [];
     }
 }

@@ -11,10 +11,10 @@ class FileBehavior extends Behavior
     /** @var string folder name */
     public $folderName;
 
-    /** @var string upload path  */
+    /** @var string|boolean upload path  */
     public $uploadPath;
 
-    /** @var string upload URL  */
+    /** @var string|boolean upload URL  */
     public $uploadUrl;
 
     /**

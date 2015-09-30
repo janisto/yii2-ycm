@@ -89,10 +89,10 @@ class Module extends \yii\base\Module
     /** @var array Model upload URLs. */
     protected $modelUrls = [];
 
-    /** @var string Upload path.  */
+    /** @var string|boolean Upload path.  */
     public $uploadPath;
 
-    /** @var string Upload URL.  */
+    /** @var string|boolean Upload URL.  */
     public $uploadUrl;
 
     /** @var integer Upload permissions for folders. */

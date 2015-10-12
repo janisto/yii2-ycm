@@ -2,6 +2,12 @@
 
 All Notable changes to `yii2-ycm` will be documented in this file.
 
+## 0.3.2 - XXXX-XX-XX
+
+### Fixed
+- Updated dependencies
+- Travis + Scrutinizer
+
 ## 0.3.1 - 2015-09-08
 
 ### Added

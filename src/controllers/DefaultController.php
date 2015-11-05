@@ -19,7 +19,7 @@ class DefaultController extends Controller
                         'actions' => ['index'],
                         'allow' => true,
                         'roles' => ['@'],
-                        'matchCallback' => function ($rule, $action) {
+                        'matchCallback' => function () {
                             return in_array(Yii::$app->user->identity->username, $this->module->admins);
                         }
                     ],

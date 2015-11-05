@@ -19,11 +19,10 @@ class DownloadController extends Controller
                         'actions' => ['csv', 'mscsv', 'excel'],
                         'allow' => true,
                         'roles' => ['@'],
-                        'matchCallback' => function ($rule, $action) {
+                        'matchCallback' => function () {
                             return in_array(Yii::$app->user->identity->username, $this->module->admins);
                         }
                     ],
-
                 ],
             ],
             'verbs' => [
